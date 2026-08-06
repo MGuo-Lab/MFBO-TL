@@ -1,0 +1,595 @@
+benchmark,model,acq,mean
+Branin-Fav,Adapter,greedy,0.7971958884210049
+Branin-Fav,Adapter,ei,0.7578501684616663
+Branin-Fav,Adapter,pi,1.0497814269900974
+Branin-Fav,Adapter,ucb,0.7302101539468462
+Branin-Fav,Adapter,mes,0.765077467599296
+Branin-Fav,Adapter,ts,0.4722824895139519
+Branin-Fav,Curriculum,greedy,0.1348100299802386
+Branin-Fav,Curriculum,ei,0.437331370506286
+Branin-Fav,Curriculum,pi,0.6501275791385525
+Branin-Fav,Curriculum,ucb,0.278081712959462
+Branin-Fav,Curriculum,mes,0.1465838555944239
+Branin-Fav,Curriculum,ts,0.4457325535332101
+Branin-Fav,DNGO-Gradient,greedy,0.17902822235540788
+Branin-Fav,DNGO-Gradient,ei,0.7411190109468565
+Branin-Fav,DNGO-Gradient,pi,0.8961445202760705
+Branin-Fav,DNGO-Gradient,ucb,0.5225543020635383
+Branin-Fav,DNGO-Gradient,mes,0.4003326847447496
+Branin-Fav,DNGO-Gradient,ts,0.28307318783453683
+Branin-Fav,DNGO-Joint,greedy,0.27477428186369185
+Branin-Fav,DNGO-Joint,ei,0.8872669052044388
+Branin-Fav,DNGO-Joint,pi,1.0145025403853285
+Branin-Fav,DNGO-Joint,ucb,0.5912333532555722
+Branin-Fav,DNGO-Joint,mes,0.7924897613194842
+Branin-Fav,DNGO-Joint,ts,0.7891936020440344
+Branin-Fav,Domain Adaptation (MMD),greedy,0.27414497456780834
+Branin-Fav,Domain Adaptation (MMD),ei,0.22302429843627994
+Branin-Fav,Domain Adaptation (MMD),pi,0.39294968066714525
+Branin-Fav,Domain Adaptation (MMD),ucb,0.09614676235456684
+Branin-Fav,Domain Adaptation (MMD),mes,0.04239202934081791
+Branin-Fav,Domain Adaptation (MMD),ts,0.28856989150602846
+Branin-Fav,Knowledge Distillation,greedy,0.20292609576700218
+Branin-Fav,Knowledge Distillation,ei,0.2636072966709643
+Branin-Fav,Knowledge Distillation,pi,0.2847895124877972
+Branin-Fav,Knowledge Distillation,ucb,0.19105357885095864
+Branin-Fav,Knowledge Distillation,mes,0.23243964234832334
+Branin-Fav,Knowledge Distillation,ts,0.299462173131228
+Branin-Fav,Progressive,greedy,0.5596397482848273
+Branin-Fav,Progressive,ei,1.2243511546010033
+Branin-Fav,Progressive,pi,1.3570871307745234
+Branin-Fav,Progressive,ucb,1.269811015523135
+Branin-Fav,Progressive,mes,1.0129032724540437
+Branin-Fav,Progressive,ts,2.0482019207821875
+Branin-Fav,Pseudo-Labeling,greedy,0.24654933834990303
+Branin-Fav,Pseudo-Labeling,ei,0.3799606230684834
+Branin-Fav,Pseudo-Labeling,pi,0.35959366714467544
+Branin-Fav,Pseudo-Labeling,ucb,0.32374501193136324
+Branin-Fav,Pseudo-Labeling,mes,0.3190538432086041
+Branin-Fav,Pseudo-Labeling,ts,0.25983001323092403
+Branin-Fav,Sequential,greedy,0.1187043964927081
+Branin-Fav,Sequential,ei,0.5666208590152383
+Branin-Fav,Sequential,pi,0.7335563288787535
+Branin-Fav,Sequential,ucb,0.4498466240555398
+Branin-Fav,Sequential,mes,0.2745665224149939
+Branin-Fav,Sequential,ts,0.35778597281775865
+Branin-Fav,Soft Parameter Sharing,greedy,0.3195060675241598
+Branin-Fav,Soft Parameter Sharing,ei,0.8886576540170911
+Branin-Fav,Soft Parameter Sharing,pi,1.001525969029154
+Branin-Fav,Soft Parameter Sharing,ucb,0.8539111633862946
+Branin-Fav,Soft Parameter Sharing,mes,0.6922502248880322
+Branin-Fav,Soft Parameter Sharing,ts,0.7047401151013319
+Branin-Fav,Two-Stage Joint,greedy,0.38205872807572755
+Branin-Fav,Two-Stage Joint,ei,0.8813200959026688
+Branin-Fav,Two-Stage Joint,pi,0.9526007302832706
+Branin-Fav,Two-Stage Joint,ucb,0.9939219575974956
+Branin-Fav,Two-Stage Joint,mes,0.8585025088323437
+Branin-Fav,Two-Stage Joint,ts,1.374298896019282
+Branin-Unfav,Adapter,greedy,0.6649085473593229
+Branin-Unfav,Adapter,ei,0.9608222163326751
+Branin-Unfav,Adapter,pi,1.0564981122873849
+Branin-Unfav,Adapter,ucb,0.5524734377668368
+Branin-Unfav,Adapter,mes,0.6194106549730017
+Branin-Unfav,Adapter,ts,0.9087062750912119
+Branin-Unfav,Curriculum,greedy,1.3585265870554883
+Branin-Unfav,Curriculum,ei,1.584249386772282
+Branin-Unfav,Curriculum,pi,2.3881486647964425
+Branin-Unfav,Curriculum,ucb,0.800006920214767
+Branin-Unfav,Curriculum,mes,0.4650677488524531
+Branin-Unfav,Curriculum,ts,1.4825357390020772
+Branin-Unfav,DNGO-Gradient,greedy,0.894847594782032
+Branin-Unfav,DNGO-Gradient,ei,1.0946463854403266
+Branin-Unfav,DNGO-Gradient,pi,1.0005171773176555
+Branin-Unfav,DNGO-Gradient,ucb,0.697191262604688
+Branin-Unfav,DNGO-Gradient,mes,0.37867408126475915
+Branin-Unfav,DNGO-Gradient,ts,0.3535725404752016
+Branin-Unfav,DNGO-Joint,greedy,1.192847875141715
+Branin-Unfav,DNGO-Joint,ei,0.9907491274680987
+Branin-Unfav,DNGO-Joint,pi,1.069016490842404
+Branin-Unfav,DNGO-Joint,ucb,1.098264529919402
+Branin-Unfav,DNGO-Joint,mes,0.549123568775434
+Branin-Unfav,DNGO-Joint,ts,0.5433681114441957
+Branin-Unfav,Domain Adaptation (MMD),greedy,1.7947190223010558
+Branin-Unfav,Domain Adaptation (MMD),ei,1.733193504465498
+Branin-Unfav,Domain Adaptation (MMD),pi,2.3670679560392625
+Branin-Unfav,Domain Adaptation (MMD),ucb,1.5630543707039384
+Branin-Unfav,Domain Adaptation (MMD),mes,1.0876770215602647
+Branin-Unfav,Domain Adaptation (MMD),ts,0.9323803450874735
+Branin-Unfav,Knowledge Distillation,greedy,1.4524255488174151
+Branin-Unfav,Knowledge Distillation,ei,0.8878930296199355
+Branin-Unfav,Knowledge Distillation,pi,1.3298902183766923
+Branin-Unfav,Knowledge Distillation,ucb,0.5082874388945546
+Branin-Unfav,Knowledge Distillation,mes,0.3882349572470636
+Branin-Unfav,Knowledge Distillation,ts,0.799526744168989
+Branin-Unfav,Progressive,greedy,2.263370449681138
+Branin-Unfav,Progressive,ei,2.71662505941069
+Branin-Unfav,Progressive,pi,2.7702401935286036
+Branin-Unfav,Progressive,ucb,2.637698186198718
+Branin-Unfav,Progressive,mes,2.1780922712308
+Branin-Unfav,Progressive,ts,3.4489732783766143
+Branin-Unfav,Pseudo-Labeling,greedy,0.9481148716413106
+Branin-Unfav,Pseudo-Labeling,ei,0.9272364742291652
+Branin-Unfav,Pseudo-Labeling,pi,1.1490240559765965
+Branin-Unfav,Pseudo-Labeling,ucb,0.5220086765956289
+Branin-Unfav,Pseudo-Labeling,mes,0.24944433954842507
+Branin-Unfav,Pseudo-Labeling,ts,0.4919388567956683
+Branin-Unfav,Sequential,greedy,1.3831189855909787
+Branin-Unfav,Sequential,ei,1.6226022600529522
+Branin-Unfav,Sequential,pi,2.327760913173267
+Branin-Unfav,Sequential,ucb,1.6663965081601362
+Branin-Unfav,Sequential,mes,0.9590698485541654
+Branin-Unfav,Sequential,ts,1.8439639559531522
+Branin-Unfav,Soft Parameter Sharing,greedy,0.9585855710348961
+Branin-Unfav,Soft Parameter Sharing,ei,1.1557159054148414
+Branin-Unfav,Soft Parameter Sharing,pi,1.1988434804572128
+Branin-Unfav,Soft Parameter Sharing,ucb,1.150252698999448
+Branin-Unfav,Soft Parameter Sharing,mes,1.2054212076586763
+Branin-Unfav,Soft Parameter Sharing,ts,1.1635728474328473
+Branin-Unfav,Two-Stage Joint,greedy,1.77277935087715
+Branin-Unfav,Two-Stage Joint,ei,2.0488296800833874
+Branin-Unfav,Two-Stage Joint,pi,2.3669383221233073
+Branin-Unfav,Two-Stage Joint,ucb,1.7989769229846626
+Branin-Unfav,Two-Stage Joint,mes,2.167776692488975
+Branin-Unfav,Two-Stage Joint,ts,3.158067602704254
+Park-Fav,Adapter,greedy,1.0873127313836177e-07
+Park-Fav,Adapter,ei,1.0873127313836177e-07
+Park-Fav,Adapter,pi,1.0873127313836177e-07
+Park-Fav,Adapter,ucb,1.0873127313836177e-07
+Park-Fav,Adapter,mes,1.0873127313836177e-07
+Park-Fav,Adapter,ts,1.0873127313836177e-07
+Park-Fav,Curriculum,greedy,1.0873127313836177e-07
+Park-Fav,Curriculum,ei,1.0873127313836177e-07
+Park-Fav,Curriculum,pi,1.0873127313836177e-07
+Park-Fav,Curriculum,ucb,1.0873127313836177e-07
+Park-Fav,Curriculum,mes,1.0873127313836177e-07
+Park-Fav,Curriculum,ts,1.0873127313836177e-07
+Park-Fav,DNGO-Gradient,greedy,1.0873127313836177e-07
+Park-Fav,DNGO-Gradient,ei,1.0873127313836177e-07
+Park-Fav,DNGO-Gradient,pi,1.0873127313836177e-07
+Park-Fav,DNGO-Gradient,ucb,1.0873127313836177e-07
+Park-Fav,DNGO-Gradient,mes,1.0873127313836177e-07
+Park-Fav,DNGO-Gradient,ts,1.0873127313836177e-07
+Park-Fav,DNGO-Joint,greedy,1.0873127313836177e-07
+Park-Fav,DNGO-Joint,ei,1.0873127313836177e-07
+Park-Fav,DNGO-Joint,pi,1.0873127313836177e-07
+Park-Fav,DNGO-Joint,ucb,1.0873127313836177e-07
+Park-Fav,DNGO-Joint,mes,1.0873127313836177e-07
+Park-Fav,DNGO-Joint,ts,1.0873127313836177e-07
+Park-Fav,Domain Adaptation (MMD),greedy,1.0873127313836177e-07
+Park-Fav,Domain Adaptation (MMD),ei,1.0873127313836177e-07
+Park-Fav,Domain Adaptation (MMD),pi,1.0873127313836177e-07
+Park-Fav,Domain Adaptation (MMD),ucb,1.0873127313836177e-07
+Park-Fav,Domain Adaptation (MMD),mes,1.0873127313836177e-07
+Park-Fav,Domain Adaptation (MMD),ts,1.0873127313836177e-07
+Park-Fav,Knowledge Distillation,greedy,1.0873127313836177e-07
+Park-Fav,Knowledge Distillation,ei,1.0873127313836177e-07
+Park-Fav,Knowledge Distillation,pi,1.0873127313836177e-07
+Park-Fav,Knowledge Distillation,ucb,1.0873127313836177e-07
+Park-Fav,Knowledge Distillation,mes,1.0873127313836177e-07
+Park-Fav,Knowledge Distillation,ts,1.0873127313836177e-07
+Park-Fav,Progressive,greedy,1.0873127313836177e-07
+Park-Fav,Progressive,ei,1.0873127313836177e-07
+Park-Fav,Progressive,pi,1.0873127313836177e-07
+Park-Fav,Progressive,ucb,1.0873127313836177e-07
+Park-Fav,Progressive,mes,1.0873127313836177e-07
+Park-Fav,Progressive,ts,1.0873127313836177e-07
+Park-Fav,Pseudo-Labeling,greedy,1.0873127313836177e-07
+Park-Fav,Pseudo-Labeling,ei,1.0873127313836177e-07
+Park-Fav,Pseudo-Labeling,pi,1.0873127313836177e-07
+Park-Fav,Pseudo-Labeling,ucb,1.0873127313836177e-07
+Park-Fav,Pseudo-Labeling,mes,1.0873127313836177e-07
+Park-Fav,Pseudo-Labeling,ts,1.0873127313836177e-07
+Park-Fav,Sequential,greedy,1.0873127313836177e-07
+Park-Fav,Sequential,ei,1.0873127313836177e-07
+Park-Fav,Sequential,pi,1.0873127313836177e-07
+Park-Fav,Sequential,ucb,1.0873127313836177e-07
+Park-Fav,Sequential,mes,1.0873127313836177e-07
+Park-Fav,Sequential,ts,1.0873127313836177e-07
+Park-Fav,Soft Parameter Sharing,greedy,1.0873127313836177e-07
+Park-Fav,Soft Parameter Sharing,ei,1.0873127313836177e-07
+Park-Fav,Soft Parameter Sharing,pi,1.0873127313836177e-07
+Park-Fav,Soft Parameter Sharing,ucb,1.0873127313836177e-07
+Park-Fav,Soft Parameter Sharing,mes,1.0873127313836177e-07
+Park-Fav,Soft Parameter Sharing,ts,1.0873127313836177e-07
+Park-Fav,Two-Stage Joint,greedy,1.0873127313836177e-07
+Park-Fav,Two-Stage Joint,ei,1.0873127313836177e-07
+Park-Fav,Two-Stage Joint,pi,1.0873127313836177e-07
+Park-Fav,Two-Stage Joint,ucb,1.0873127313836177e-07
+Park-Fav,Two-Stage Joint,mes,1.0873127313836177e-07
+Park-Fav,Two-Stage Joint,ts,1.0873127313836177e-07
+Park-Unfav,Adapter,greedy,0.09060951958593781
+Park-Unfav,Adapter,ei,0.09060952056559661
+Park-Unfav,Adapter,pi,0.0906095174874191
+Park-Unfav,Adapter,ucb,0.09060951778521308
+Park-Unfav,Adapter,mes,0.09060951556605734
+Park-Unfav,Adapter,ts,1.1029422195939016e-07
+Park-Unfav,Curriculum,greedy,1.501287311019684e-07
+Park-Unfav,Curriculum,ei,1.3253520952009208e-07
+Park-Unfav,Curriculum,pi,1.377921870017256e-07
+Park-Unfav,Curriculum,ucb,1.3350597176151246e-07
+Park-Unfav,Curriculum,mes,1.309141114661638e-07
+Park-Unfav,Curriculum,ts,1.1014988439281443e-07
+Park-Unfav,DNGO-Gradient,greedy,1.1279888148876162e-07
+Park-Unfav,DNGO-Gradient,ei,1.1358707499769999e-07
+Park-Unfav,DNGO-Gradient,pi,1.1126945754308564e-07
+Park-Unfav,DNGO-Gradient,ucb,1.2208178996169519e-07
+Park-Unfav,DNGO-Gradient,mes,1.2202797735270887e-07
+Park-Unfav,DNGO-Gradient,ts,1.1031898637069469e-07
+Park-Unfav,DNGO-Joint,greedy,0.04530480823104528
+Park-Unfav,DNGO-Joint,ei,1.2661891079609685e-07
+Park-Unfav,DNGO-Joint,pi,0.04530481305086728
+Park-Unfav,DNGO-Joint,ucb,1.1980359277125718e-07
+Park-Unfav,DNGO-Joint,mes,1.1979282402448096e-07
+Park-Unfav,DNGO-Joint,ts,1.1045967096920002e-07
+Park-Unfav,Domain Adaptation (MMD),greedy,1.3400244381103926e-07
+Park-Unfav,Domain Adaptation (MMD),ei,1.2828471609161208e-07
+Park-Unfav,Domain Adaptation (MMD),pi,1.3385810624446355e-07
+Park-Unfav,Domain Adaptation (MMD),ucb,1.3101986941734e-07
+Park-Unfav,Domain Adaptation (MMD),mes,1.330587668504437e-07
+Park-Unfav,Domain Adaptation (MMD),ts,1.1049834610360146e-07
+Park-Unfav,Knowledge Distillation,greedy,1.1901976799012744e-07
+Park-Unfav,Knowledge Distillation,ei,1.2439462173364713e-07
+Park-Unfav,Knowledge Distillation,pi,1.1704624351849148e-07
+Park-Unfav,Knowledge Distillation,ucb,1.2485109624722394e-07
+Park-Unfav,Knowledge Distillation,mes,1.2483435353179847e-07
+Park-Unfav,Knowledge Distillation,ts,1.1020967097045001e-07
+Park-Unfav,Progressive,greedy,0.04530482036637328
+Park-Unfav,Progressive,ei,1.1998142310929022e-07
+Park-Unfav,Progressive,pi,0.04530481749476515
+Park-Unfav,Progressive,ucb,1.289250725126963e-07
+Park-Unfav,Progressive,mes,1.288652859350607e-07
+Park-Unfav,Progressive,ts,1.1045967096920002e-07
+Park-Unfav,Pseudo-Labeling,greedy,1.249827499732494e-07
+Park-Unfav,Pseudo-Labeling,ei,1.2026207654656265e-07
+Park-Unfav,Pseudo-Labeling,pi,1.3188458177282758e-07
+Park-Unfav,Pseudo-Labeling,ucb,1.27185019789375e-07
+Park-Unfav,Pseudo-Labeling,mes,1.2677364010220219e-07
+Park-Unfav,Pseudo-Labeling,ts,1.1049834610360146e-07
+Park-Unfav,Sequential,greedy,0.04530481041871752
+Park-Unfav,Sequential,ei,1.2859648491608493e-07
+Park-Unfav,Sequential,pi,0.04530481091871751
+Park-Unfav,Sequential,ucb,1.222384330105272e-07
+Park-Unfav,Sequential,mes,1.2208178996169519e-07
+Park-Unfav,Sequential,ts,1.1048443538050455e-07
+Park-Unfav,Soft Parameter Sharing,greedy,0.04530482695595889
+Park-Unfav,Soft Parameter Sharing,ei,1.247147894719918e-07
+Park-Unfav,Soft Parameter Sharing,pi,0.0453062705277543
+Park-Unfav,Soft Parameter Sharing,ucb,1.2604169451429708e-07
+Park-Unfav,Soft Parameter Sharing,mes,1.2808502918056998e-07
+Park-Unfav,Soft Parameter Sharing,ts,1.0994576024860311e-07
+Park-Unfav,Two-Stage Joint,greedy,1.2516105032212085e-07
+Park-Unfav,Two-Stage Joint,ei,1.2419808589439022e-07
+Park-Unfav,Two-Stage Joint,pi,1.2482313023895652e-07
+Park-Unfav,Two-Stage Joint,ucb,1.2675736991302527e-07
+Park-Unfav,Two-Stage Joint,mes,1.2671432605081517e-07
+Park-Unfav,Two-Stage Joint,ts,1.1023443538175457e-07
+COFs,Adapter,greedy,2.944353501029049
+COFs,Adapter,ei,6.664741199285392
+COFs,Adapter,pi,6.3403971277447795
+COFs,Adapter,ucb,6.843670105558035
+COFs,Adapter,mes,5.672561121821788
+COFs,Adapter,ts,4.068056679438307
+COFs,Curriculum,greedy,0.8959748230791531
+COFs,Curriculum,ei,6.523142001881813
+COFs,Curriculum,pi,5.70927504913515
+COFs,Curriculum,ucb,6.4450135028477415
+COFs,Curriculum,mes,6.169362768766487
+COFs,Curriculum,ts,2.8445399667249482
+COFs,DNGO-Gradient,greedy,0.8769999635650227
+COFs,DNGO-Gradient,ei,6.131009224675662
+COFs,DNGO-Gradient,pi,6.267281732947536
+COFs,DNGO-Gradient,ucb,5.486403315765748
+COFs,DNGO-Gradient,mes,5.960790677385587
+COFs,DNGO-Gradient,ts,2.384273978139314
+COFs,DNGO-Joint,greedy,0.9801474606902815
+COFs,DNGO-Joint,ei,5.788560950019862
+COFs,DNGO-Joint,pi,5.719133472466419
+COFs,DNGO-Joint,ucb,5.3840761839263385
+COFs,DNGO-Joint,mes,5.9534605490999475
+COFs,DNGO-Joint,ts,3.7712477342076562
+COFs,Domain Adaptation (MMD),greedy,1.6236683196687067
+COFs,Domain Adaptation (MMD),ei,5.633716654878258
+COFs,Domain Adaptation (MMD),pi,6.564376311531214
+COFs,Domain Adaptation (MMD),ucb,6.425580433647515
+COFs,Domain Adaptation (MMD),mes,5.889506455029137
+COFs,Domain Adaptation (MMD),ts,3.4568160079280874
+COFs,Knowledge Distillation,greedy,1.2578765900866258
+COFs,Knowledge Distillation,ei,6.696195161594993
+COFs,Knowledge Distillation,pi,5.648631874083906
+COFs,Knowledge Distillation,ucb,6.228463507885037
+COFs,Knowledge Distillation,mes,6.188725942459342
+COFs,Knowledge Distillation,ts,3.1333606433049397
+COFs,Progressive,greedy,3.0888499155556848
+COFs,Progressive,ei,4.981671771059684
+COFs,Progressive,pi,4.4680660915705515
+COFs,Progressive,ucb,5.631420431583252
+COFs,Progressive,mes,5.488196821737878
+COFs,Progressive,ts,2.1749262888865055
+COFs,Pseudo-Labeling,greedy,1.227952399443367
+COFs,Pseudo-Labeling,ei,6.36194179342606
+COFs,Pseudo-Labeling,pi,5.957753126232687
+COFs,Pseudo-Labeling,ucb,5.850197111656488
+COFs,Pseudo-Labeling,mes,6.134424624463238
+COFs,Pseudo-Labeling,ts,2.497320923999807
+COFs,Sequential,greedy,0.4208631880556418
+COFs,Sequential,ei,7.1452132941209285
+COFs,Sequential,pi,8.090793844191804
+COFs,Sequential,ucb,7.143641676916301
+COFs,Sequential,mes,7.625301720854142
+COFs,Sequential,ts,4.30249300524744
+COFs,Soft Parameter Sharing,greedy,1.3705427381331674
+COFs,Soft Parameter Sharing,ei,5.840311777107591
+COFs,Soft Parameter Sharing,pi,5.665035440124627
+COFs,Soft Parameter Sharing,ucb,6.893997267877445
+COFs,Soft Parameter Sharing,mes,6.564443247088285
+COFs,Soft Parameter Sharing,ts,2.062937357353438
+COFs,Two-Stage Joint,greedy,1.8875794777711334
+COFs,Two-Stage Joint,ei,4.235438250231523
+COFs,Two-Stage Joint,pi,4.863161396296751
+COFs,Two-Stage Joint,ucb,5.711748490717127
+COFs,Two-Stage Joint,mes,5.527226596895035
+COFs,Two-Stage Joint,ts,2.952441984193505
+FreeSolv,Adapter,greedy,1.0594999999999999
+FreeSolv,Adapter,ei,1.3370000000000002
+FreeSolv,Adapter,pi,1.0645000000000002
+FreeSolv,Adapter,ucb,1.514
+FreeSolv,Adapter,mes,1.3125
+FreeSolv,Adapter,ts,0.36449999999999994
+FreeSolv,Curriculum,greedy,0.6489999999999999
+FreeSolv,Curriculum,ei,0.6730000000000002
+FreeSolv,Curriculum,pi,0.6910000000000002
+FreeSolv,Curriculum,ucb,0.6415
+FreeSolv,Curriculum,mes,0.6585000000000001
+FreeSolv,Curriculum,ts,0.3095
+FreeSolv,DNGO-Gradient,greedy,0.6310000000000002
+FreeSolv,DNGO-Gradient,ei,0.8630000000000001
+FreeSolv,DNGO-Gradient,pi,0.6315000000000002
+FreeSolv,DNGO-Gradient,ucb,0.8020000000000002
+FreeSolv,DNGO-Gradient,mes,0.7615000000000001
+FreeSolv,DNGO-Gradient,ts,0.29950000000000004
+FreeSolv,DNGO-Joint,greedy,0.6875000000000002
+FreeSolv,DNGO-Joint,ei,0.8275000000000002
+FreeSolv,DNGO-Joint,pi,0.6680000000000004
+FreeSolv,DNGO-Joint,ucb,0.8785000000000002
+FreeSolv,DNGO-Joint,mes,0.8710000000000002
+FreeSolv,DNGO-Joint,ts,0.3135
+FreeSolv,Domain Adaptation (MMD),greedy,0.5720000000000002
+FreeSolv,Domain Adaptation (MMD),ei,0.7610000000000002
+FreeSolv,Domain Adaptation (MMD),pi,0.6665000000000003
+FreeSolv,Domain Adaptation (MMD),ucb,0.8250000000000002
+FreeSolv,Domain Adaptation (MMD),mes,1.004
+FreeSolv,Domain Adaptation (MMD),ts,0.33599999999999997
+FreeSolv,Knowledge Distillation,greedy,0.49850000000000005
+FreeSolv,Knowledge Distillation,ei,0.6980000000000002
+FreeSolv,Knowledge Distillation,pi,0.5945
+FreeSolv,Knowledge Distillation,ucb,0.6505
+FreeSolv,Knowledge Distillation,mes,0.7345000000000003
+FreeSolv,Knowledge Distillation,ts,0.3025000000000001
+FreeSolv,Progressive,greedy,0.5770000000000002
+FreeSolv,Progressive,ei,0.794
+FreeSolv,Progressive,pi,0.687
+FreeSolv,Progressive,ucb,0.784
+FreeSolv,Progressive,mes,0.7334999999999999
+FreeSolv,Progressive,ts,0.30299999999999994
+FreeSolv,Pseudo-Labeling,greedy,0.5390000000000001
+FreeSolv,Pseudo-Labeling,ei,0.6835000000000002
+FreeSolv,Pseudo-Labeling,pi,0.633
+FreeSolv,Pseudo-Labeling,ucb,0.6969999999999998
+FreeSolv,Pseudo-Labeling,mes,0.6680000000000001
+FreeSolv,Pseudo-Labeling,ts,0.30300000000000005
+FreeSolv,Sequential,greedy,0.5995000000000001
+FreeSolv,Sequential,ei,0.8410000000000002
+FreeSolv,Sequential,pi,0.7920000000000003
+FreeSolv,Sequential,ucb,0.974
+FreeSolv,Sequential,mes,0.8230000000000001
+FreeSolv,Sequential,ts,0.3015
+FreeSolv,Soft Parameter Sharing,greedy,0.7225000000000001
+FreeSolv,Soft Parameter Sharing,ei,0.905
+FreeSolv,Soft Parameter Sharing,pi,0.8135
+FreeSolv,Soft Parameter Sharing,ucb,0.8495000000000001
+FreeSolv,Soft Parameter Sharing,mes,1.0800000000000005
+FreeSolv,Soft Parameter Sharing,ts,0.3125000000000001
+FreeSolv,Two-Stage Joint,greedy,0.596
+FreeSolv,Two-Stage Joint,ei,0.7385
+FreeSolv,Two-Stage Joint,pi,0.7485
+FreeSolv,Two-Stage Joint,ucb,0.7355
+FreeSolv,Two-Stage Joint,mes,0.68
+FreeSolv,Two-Stage Joint,ts,0.31399999999999995
+Polarizability,Adapter,greedy,0.14175191815856775
+Polarizability,Adapter,ei,0.15719309462915598
+Polarizability,Adapter,pi,0.1423113810741688
+Polarizability,Adapter,ucb,0.1715153452685422
+Polarizability,Adapter,mes,0.16702365728900254
+Polarizability,Adapter,ts,0.07266624040920706
+Polarizability,Curriculum,greedy,0.13972186700767258
+Polarizability,Curriculum,ei,0.12838874680306908
+Polarizability,Curriculum,pi,0.12770140664961632
+Polarizability,Curriculum,ucb,0.1152653452685422
+Polarizability,Curriculum,mes,0.12121163682864448
+Polarizability,Curriculum,ts,0.05874360613810731
+Polarizability,DNGO-Gradient,greedy,0.12690217391304343
+Polarizability,DNGO-Gradient,ei,0.13415920716112534
+Polarizability,DNGO-Gradient,pi,0.1274936061381074
+Polarizability,DNGO-Gradient,ucb,0.12121163682864451
+Polarizability,DNGO-Gradient,mes,0.1271579283887468
+Polarizability,DNGO-Gradient,ts,0.061732736572889926
+Polarizability,DNGO-Joint,greedy,0.14593989769820967
+Polarizability,DNGO-Joint,ei,0.12017263427109974
+Polarizability,DNGO-Joint,pi,0.1273337595907928
+Polarizability,DNGO-Joint,ucb,0.11473785166240406
+Polarizability,DNGO-Joint,mes,0.11473785166240406
+Polarizability,DNGO-Joint,ts,0.061540920716112425
+Polarizability,Domain Adaptation (MMD),greedy,0.1267263427109974
+Polarizability,Domain Adaptation (MMD),ei,0.12805306905370845
+Polarizability,Domain Adaptation (MMD),pi,0.13578964194373397
+Polarizability,Domain Adaptation (MMD),ucb,0.11472186700767262
+Polarizability,Domain Adaptation (MMD),mes,0.12100383631713552
+Polarizability,Domain Adaptation (MMD),ts,0.05874360613810731
+Polarizability,Knowledge Distillation,greedy,0.13972186700767258
+Polarizability,Knowledge Distillation,ei,0.12854859335038366
+Polarizability,Knowledge Distillation,pi,0.1276694373401534
+Polarizability,Knowledge Distillation,ucb,0.11523337595907927
+Polarizability,Knowledge Distillation,mes,0.11504156010230178
+Polarizability,Knowledge Distillation,ts,0.05874360613810731
+Polarizability,Progressive,greedy,0.1420236572890025
+Polarizability,Progressive,ei,0.13454283887468033
+Polarizability,Progressive,pi,0.1416240409207161
+Polarizability,Progressive,ucb,0.11492966751918159
+Polarizability,Progressive,mes,0.12140345268542199
+Polarizability,Progressive,ts,0.05874360613810731
+Polarizability,Pseudo-Labeling,greedy,0.13901854219948845
+Polarizability,Pseudo-Labeling,ei,0.12274616368286446
+Polarizability,Pseudo-Labeling,pi,0.1276694373401534
+Polarizability,Pseudo-Labeling,ucb,0.10911125319693094
+Polarizability,Pseudo-Labeling,mes,0.10891943734015344
+Polarizability,Pseudo-Labeling,ts,0.05874360613810731
+Polarizability,Sequential,greedy,0.13972186700767258
+Polarizability,Sequential,ei,0.12838874680306908
+Polarizability,Sequential,pi,0.12770140664961632
+Polarizability,Sequential,ucb,0.1152653452685422
+Polarizability,Sequential,mes,0.1150735294117647
+Polarizability,Sequential,ts,0.05874360613810731
+Polarizability,Soft Parameter Sharing,greedy,0.14242327365728896
+Polarizability,Soft Parameter Sharing,ei,0.12902813299232738
+Polarizability,Soft Parameter Sharing,pi,0.12850063938618922
+Polarizability,Soft Parameter Sharing,ucb,0.13569373401534526
+Polarizability,Soft Parameter Sharing,mes,0.13449488491048595
+Polarizability,Soft Parameter Sharing,ts,0.05874360613810731
+Polarizability,Two-Stage Joint,greedy,0.13956202046035798
+Polarizability,Two-Stage Joint,ei,0.14251918158567772
+Polarizability,Two-Stage Joint,pi,0.14216751918158566
+Polarizability,Two-Stage Joint,ucb,0.134846547314578
+Polarizability,Two-Stage Joint,mes,0.12101982097186699
+Polarizability,Two-Stage Joint,ts,0.05874360613810731
+HOPV15,Adapter,greedy,2.7755
+HOPV15,Adapter,ei,2.8609999999999998
+HOPV15,Adapter,pi,2.91
+HOPV15,Adapter,ucb,2.7944999999999993
+HOPV15,Adapter,mes,3.0785000000000005
+HOPV15,Adapter,ts,2.4
+HOPV15,Curriculum,greedy,2.4095
+HOPV15,Curriculum,ei,2.6914999999999996
+HOPV15,Curriculum,pi,2.792
+HOPV15,Curriculum,ucb,2.7619999999999996
+HOPV15,Curriculum,mes,2.860499999999999
+HOPV15,Curriculum,ts,2.9025000000000007
+HOPV15,DNGO-Gradient,greedy,2.227
+HOPV15,DNGO-Gradient,ei,2.5704999999999996
+HOPV15,DNGO-Gradient,pi,2.6975
+HOPV15,DNGO-Gradient,ucb,2.6169999999999995
+HOPV15,DNGO-Gradient,mes,2.7300000000000004
+HOPV15,DNGO-Gradient,ts,2.4530000000000003
+HOPV15,DNGO-Joint,greedy,2.3884999999999996
+HOPV15,DNGO-Joint,ei,2.9210000000000003
+HOPV15,DNGO-Joint,pi,2.7009999999999996
+HOPV15,DNGO-Joint,ucb,2.5129999999999995
+HOPV15,DNGO-Joint,mes,2.3440000000000003
+HOPV15,DNGO-Joint,ts,2.4035
+HOPV15,Domain Adaptation (MMD),greedy,1.9834999999999998
+HOPV15,Domain Adaptation (MMD),ei,2.5764999999999993
+HOPV15,Domain Adaptation (MMD),pi,2.7359999999999998
+HOPV15,Domain Adaptation (MMD),ucb,2.54
+HOPV15,Domain Adaptation (MMD),mes,2.682
+HOPV15,Domain Adaptation (MMD),ts,2.2535
+HOPV15,Knowledge Distillation,greedy,1.886
+HOPV15,Knowledge Distillation,ei,2.529
+HOPV15,Knowledge Distillation,pi,2.3559999999999994
+HOPV15,Knowledge Distillation,ucb,2.526
+HOPV15,Knowledge Distillation,mes,2.701999999999999
+HOPV15,Knowledge Distillation,ts,1.9649999999999999
+HOPV15,Progressive,greedy,2.9699999999999998
+HOPV15,Progressive,ei,3.0119999999999996
+HOPV15,Progressive,pi,2.9779999999999993
+HOPV15,Progressive,ucb,2.8364999999999996
+HOPV15,Progressive,mes,2.8624999999999994
+HOPV15,Progressive,ts,1.9904999999999997
+HOPV15,Pseudo-Labeling,greedy,2.2235
+HOPV15,Pseudo-Labeling,ei,2.742
+HOPV15,Pseudo-Labeling,pi,2.4504999999999995
+HOPV15,Pseudo-Labeling,ucb,2.5774999999999997
+HOPV15,Pseudo-Labeling,mes,2.9485
+HOPV15,Pseudo-Labeling,ts,2.62
+HOPV15,Sequential,greedy,2.3725
+HOPV15,Sequential,ei,2.8095000000000003
+HOPV15,Sequential,pi,2.3935
+HOPV15,Sequential,ucb,2.7479999999999998
+HOPV15,Sequential,mes,2.7355
+HOPV15,Sequential,ts,2.2965
+HOPV15,Soft Parameter Sharing,greedy,2.071
+HOPV15,Soft Parameter Sharing,ei,2.2870000000000004
+HOPV15,Soft Parameter Sharing,pi,2.5255
+HOPV15,Soft Parameter Sharing,ucb,2.5915
+HOPV15,Soft Parameter Sharing,mes,2.3520000000000008
+HOPV15,Soft Parameter Sharing,ts,2.441
+HOPV15,Two-Stage Joint,greedy,2.312
+HOPV15,Two-Stage Joint,ei,2.3405
+HOPV15,Two-Stage Joint,pi,2.761
+HOPV15,Two-Stage Joint,ucb,2.4234999999999998
+HOPV15,Two-Stage Joint,mes,2.234
+HOPV15,Two-Stage Joint,ts,2.1895000000000002
+Matbench-Gap,Adapter,greedy,0.3724999999999999
+Matbench-Gap,Adapter,ei,0.5189999999999999
+Matbench-Gap,Adapter,pi,0.376
+Matbench-Gap,Adapter,ucb,0.5264999999999999
+Matbench-Gap,Adapter,mes,0.634
+Matbench-Gap,Adapter,ts,0.6610000000000001
+Matbench-Gap,Curriculum,greedy,0.39
+Matbench-Gap,Curriculum,ei,0.24899999999999994
+Matbench-Gap,Curriculum,pi,0.365
+Matbench-Gap,Curriculum,ucb,0.4539999999999999
+Matbench-Gap,Curriculum,mes,0.30199999999999994
+Matbench-Gap,Curriculum,ts,0.3935
+Matbench-Gap,DNGO-Gradient,greedy,0.47699999999999976
+Matbench-Gap,DNGO-Gradient,ei,0.5335
+Matbench-Gap,DNGO-Gradient,pi,0.3254999999999999
+Matbench-Gap,DNGO-Gradient,ucb,0.3675
+Matbench-Gap,DNGO-Gradient,mes,0.3754999999999999
+Matbench-Gap,DNGO-Gradient,ts,0.316
+Matbench-Gap,DNGO-Joint,greedy,0.39749999999999996
+Matbench-Gap,DNGO-Joint,ei,0.5245000000000001
+Matbench-Gap,DNGO-Joint,pi,0.396
+Matbench-Gap,DNGO-Joint,ucb,0.5605
+Matbench-Gap,DNGO-Joint,mes,0.5205000000000001
+Matbench-Gap,DNGO-Joint,ts,0.47699999999999976
+Matbench-Gap,Domain Adaptation (MMD),greedy,0.4795
+Matbench-Gap,Domain Adaptation (MMD),ei,0.26450000000000007
+Matbench-Gap,Domain Adaptation (MMD),pi,0.355
+Matbench-Gap,Domain Adaptation (MMD),ucb,0.31849999999999995
+Matbench-Gap,Domain Adaptation (MMD),mes,0.321
+Matbench-Gap,Domain Adaptation (MMD),ts,0.27849999999999997
+Matbench-Gap,Knowledge Distillation,greedy,0.314
+Matbench-Gap,Knowledge Distillation,ei,0.196
+Matbench-Gap,Knowledge Distillation,pi,0.1765
+Matbench-Gap,Knowledge Distillation,ucb,0.328
+Matbench-Gap,Knowledge Distillation,mes,0.25149999999999995
+Matbench-Gap,Knowledge Distillation,ts,0.295
+Matbench-Gap,Progressive,greedy,0.22949999999999995
+Matbench-Gap,Progressive,ei,0.25349999999999995
+Matbench-Gap,Progressive,pi,0.3199999999999999
+Matbench-Gap,Progressive,ucb,0.20899999999999994
+Matbench-Gap,Progressive,mes,0.24799999999999994
+Matbench-Gap,Progressive,ts,0.21750000000000003
+Matbench-Gap,Pseudo-Labeling,greedy,0.42800000000000005
+Matbench-Gap,Pseudo-Labeling,ei,0.25849999999999984
+Matbench-Gap,Pseudo-Labeling,pi,0.29949999999999993
+Matbench-Gap,Pseudo-Labeling,ucb,0.2645
+Matbench-Gap,Pseudo-Labeling,mes,0.267
+Matbench-Gap,Pseudo-Labeling,ts,0.24599999999999994
+Matbench-Gap,Sequential,greedy,0.491
+Matbench-Gap,Sequential,ei,0.5740000000000001
+Matbench-Gap,Sequential,pi,0.6129999999999999
+Matbench-Gap,Sequential,ucb,0.5910000000000001
+Matbench-Gap,Sequential,mes,0.5845
+Matbench-Gap,Sequential,ts,0.5039999999999998
+Matbench-Gap,Soft Parameter Sharing,greedy,0.497
+Matbench-Gap,Soft Parameter Sharing,ei,0.53
+Matbench-Gap,Soft Parameter Sharing,pi,0.43149999999999994
+Matbench-Gap,Soft Parameter Sharing,ucb,0.37799999999999995
+Matbench-Gap,Soft Parameter Sharing,mes,0.43900000000000006
+Matbench-Gap,Soft Parameter Sharing,ts,0.4574999999999999
+Matbench-Gap,Two-Stage Joint,greedy,0.48749999999999993
+Matbench-Gap,Two-Stage Joint,ei,0.5105000000000001
+Matbench-Gap,Two-Stage Joint,pi,0.35299999999999987
+Matbench-Gap,Two-Stage Joint,ucb,0.43249999999999983
+Matbench-Gap,Two-Stage Joint,mes,0.368
+Matbench-Gap,Two-Stage Joint,ts,0.323

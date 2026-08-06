@@ -1,0 +1,151 @@
+%% Fig. 1 overview for
+%% "Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian Optimization"
+%% Reproducible vector source for paper_figures/fig1_overview.png (3-panel schematic).
+%% Helvetica, colour-blind-safe blue/orange palette (matches graphical_abstract.tex / Figs 2-4).
+%% Build:  pdflatex fig1_overview.tex  ->  fig1_overview.pdf (auto-cropped)
+\documentclass[border=8pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+
+% ---- palette (matches graphical_abstract.tex / Figs 2-4) ----
+\definecolor{gpcol}{RGB}{242,170,132}   % salmon (light)  -- GP
+\definecolor{gpbox}{RGB}{199,109,63}    % GP family box (orange)
+\definecolor{tlcol}{RGB}{78,149,217}    % blue (light)    -- TL
+\definecolor{tlbox}{RGB}{60,110,180}    % TL box (blue)
+\definecolor{tldk}{RGB}{38,92,148}
+\definecolor{navy}{RGB}{31,78,128}      % flask
+\definecolor{ink}{RGB}{43,50,64}
+\definecolor{sub}{RGB}{120,130,144}
+\definecolor{pline}{RGB}{208,214,223}
+
+\begin{document}
+\begin{tikzpicture}[
+  font=\sffamily,
+  >={Stealth[length=3mm,width=2.4mm]},
+  every node/.style={inner sep=0pt, outer sep=0pt},
+  panelbox/.style={rounded corners=7pt, draw=pline, line width=0.9pt, fill=white},
+  hdr/.style={text=ink, font=\bfseries\large, align=center},
+  slab/.style={text=sub, font=\footnotesize\itshape, align=center},
+  blab/.style={text=ink, font=\bfseries\small, align=center},
+  glab/.style={text=sub, font=\scriptsize, align=left},
+  chip/.style={rounded corners=4pt, inner xsep=7pt, inner ysep=6pt,
+               font=\bfseries\scriptsize, text=white, align=center},
+  netbox/.style={rounded corners=3pt, draw=tldk, line width=0.8pt, fill=white,
+                 minimum width=1.0cm, minimum height=0.62cm, font=\scriptsize, text=tldk, align=center},
+  pflow/.style={->, line width=1.8pt, draw=ink!70},
+]
+
+% ===== panel geometry =====
+\def\ya{0}\def\yb{7.0}
+\def\Al{0}\def\Ar{6.0}
+\def\Bl{6.95}\def\Brr{12.95}
+\def\Cl{13.9}\def\Cr{20.2}
+\pgfmathsetmacro\Ac{(\Al+\Ar)/2}
+\pgfmathsetmacro\Bc{(\Bl+\Brr)/2}
+\pgfmathsetmacro\Cc{(\Cl+\Cr)/2}
+
+% ===================== PANEL A : multi-fidelity problem =====================
+\node[panelbox, fit={(\Al,\ya) (\Ar,\yb)}] (PA) {};
+\node[hdr, anchor=north] at (\Ac,\yb-0.22) {Multi-fidelity problem};
+\node[slab, anchor=north] at (\Ac,\yb-0.80) {self-driving laboratory};
+\node[text=ink, font=\small, draw=pline, line width=0.7pt, rounded corners=3pt, fill=white,
+      inner sep=5pt, anchor=north] at (\Ac,\yb-1.38) {candidate pool $\mathcal{X}_{\mathrm{cand}}$};
+
+% --- monitor icon (LF) ---
+\pgfmathsetmacro\mx{1.55}\pgfmathsetmacro\my{3.75}
+\draw[tlcol, line width=1.1pt, fill=tlcol!10, rounded corners=2.5pt]
+      (\mx-0.72,\my-0.54) rectangle (\mx+0.72,\my+0.54);
+\draw[tlcol, line width=1.1pt] (\mx,\my-0.54)--(\mx,\my-0.80);
+\draw[tlcol, line width=1.6pt] (\mx-0.32,\my-0.80)--(\mx+0.32,\my-0.80);
+\foreach \a in {0,60,120}{
+  \draw[tlcol, line width=0.9pt, rotate around={\a:(\mx,\my)}] (\mx,\my) ellipse (0.46 and 0.17);}
+\fill[tldk] (\mx,\my) circle (0.07);
+\node[blab, anchor=north] at (\mx,\my-1.05) {Low fidelity};
+\node[text=sub, font=\scriptsize, anchor=north, align=center] at (\mx,\my-1.40)
+     {simulation\\cheap, abundant $\cdot$ $\rho\!\ll\!1$};
+
+% --- flask icon (HF) ---
+\pgfmathsetmacro\fx{4.35}\pgfmathsetmacro\fy{3.66}
+\fill[navy] (\fx-0.13,\fy+0.52) -- (\fx-0.13,\fy+0.18) -- (\fx-0.54,\fy-0.56)
+            -- (\fx+0.54,\fy-0.56) -- (\fx+0.13,\fy+0.18) -- (\fx+0.13,\fy+0.52) -- cycle;
+\draw[navy, line width=1.5pt] (\fx-0.22,\fy+0.52)--(\fx+0.22,\fy+0.52);
+\node[blab, anchor=north] at (\fx,\fy-0.95) {High fidelity};
+\node[text=sub, font=\scriptsize, anchor=north, align=center] at (\fx,\fy-1.30)
+     {experiment\\costly, scarce $\cdot$ cost $1$};
+
+% ===================== arrow A -> B =====================
+\draw[pflow] (\Ar+0.14,3.5) -- (\Bl-0.14,3.5);
+
+% ===================== PANEL B : controlled comparison =====================
+\node[panelbox, fit={(\Bl,\ya) (\Brr,\yb)}] (PB) {};
+\node[hdr, anchor=north] at (\Bc,\yb-0.22) {Controlled comparison};
+\node[slab, anchor=north] at (\Bc,\yb-0.80) {fix acquisition $\cdot$ schedule $\cdot$ capacity};
+\node[blab, anchor=north] at (\Bc,\yb-1.30) {$\rightarrow$ vary only the surrogate};
+
+% GP lane
+\node[chip, fill=gpbox, anchor=west, text width=2.5cm] (gpc) at (\Bl+0.4,4.55)
+     {Gaussian-process (GP) family};
+\draw[gpbox, line width=1.3pt]
+   (10.2,4.55) .. controls (10.42,5.0) and (10.64,4.10) .. (10.86,4.55)
+   .. controls (11.08,5.0) and (11.30,4.10) .. (11.52,4.55);
+\node[glab, anchor=west] at (11.7,4.55) {MFGP $\cdot$ NARGP\\DKL $\cdot$ sparse GP};
+
+% TL lane
+\node[chip, fill=tlbox, anchor=west, text width=2.5cm] (tlc) at (\Bl+0.4,2.95)
+     {Transfer-learning (TL) surrogates $\times 11$};
+\node[netbox, anchor=west] (gL) at (10.15,2.95) {$g^{(L)}$};
+\node[netbox, right=0.34cm of gL] (gH) {$g^{(H)}$};
+\node[circle, draw=tldk, line width=0.8pt, fill=white, inner sep=1.5pt, font=\scriptsize,
+      right=0.32cm of gH] (sm) {$+$};
+\draw[->,line width=0.8pt,draw=tldk] (gL)--(gH);
+\draw[->,line width=0.8pt,draw=tldk] (gH)--(sm);
+\node[text=tldk, font=\scriptsize, anchor=west] at ($(sm.east)+(0.1,0)$) {$\hat{y}^{(H)}$};
+
+\node[slab, anchor=north] at (\Bc,1.62) {residual transfer $+$ Bayesian last-layer uncertainty};
+
+% ===================== arrow B -> C =====================
+\draw[pflow] (\Brr+0.14,3.5) -- (\Cl-0.14,3.5);
+
+% ===================== PANEL C : transfer-learning wins =====================
+\node[panelbox, fit={(\Cl,\ya) (\Cr,\yb)}] (PC) {};
+\node[hdr, anchor=north] at (\Cc,\yb-0.22) {Transfer-learning wins};
+\node[slab, anchor=north] at (\Cc,\yb-0.80) {on molecular \& materials tasks};
+
+% regret curve
+\begin{scope}[shift={(\Cl+0.95,4.48)}]
+  \draw[pline, line width=0.8pt] (0,1.12) -- (0,0) -- (3.95,0);
+  \node[text=sub, font=\scriptsize, anchor=south west] at (0.03,1.08) {regret};
+  \node[text=sub, font=\scriptsize, anchor=north east] at (3.95,-0.07) {budget};
+  \draw[gpbox, line width=1.7pt] (0.05,1.0) .. controls (1.7,0.83) and (2.6,0.74) .. (3.9,0.70);
+  \draw[tlbox, line width=1.7pt] (0.05,0.95) .. controls (1.05,0.42) and (2.1,0.2) .. (3.9,0.12);
+  \node[text=gpbox, font=\scriptsize\bfseries, anchor=south] at (3.1,0.76) {GP};
+  \node[text=tlbox, font=\scriptsize\bfseries, anchor=north] at (3.0,0.10) {TL};
+\end{scope}
+\node[text=sub, font=\scriptsize, anchor=north] at (\Cc,4.20) {converges fast, up to $10\times$ lower regret};
+
+% compute bars
+\node[text=sub, font=\scriptsize, anchor=south] at (\Cc,3.50) {compute per optimization loop};
+\node[glab, anchor=east, text=sub] at (\Cl+1.05,3.13) {GP};
+\fill[gpcol] (\Cl+1.15,3.01) rectangle (\Cr-0.45,3.27);
+\node[glab, anchor=east, text=sub] at (\Cl+1.05,2.55) {TL};
+\fill[tlcol] (\Cl+1.15,2.43) rectangle (\Cl+1.62,2.69);
+\node[text=tlbox, font=\scriptsize\bfseries, anchor=west] at (\Cl+1.78,2.56) {up to $45\times$ fewer FLOPs};
+
+% legend
+\fill[gpcol] (\Cl+1.95,1.55) rectangle (\Cl+2.2,1.73);
+\node[glab, anchor=west, text=sub] at (\Cl+2.3,1.64) {GP};
+\fill[tlcol] (\Cl+3.0,1.55) rectangle (\Cl+3.25,1.73);
+\node[glab, anchor=west, text=sub] at (\Cl+3.35,1.64) {TL};
+
+% ===================== closed-loop feedback (SDL) =====================
+\draw[->, line width=1.0pt, draw=sub, dashed, rounded corners=9pt]
+  (\Cc,\ya-0.06) -- (\Cc,-0.92) -- (\Ac,-0.92) -- (\Ac,\ya-0.06);
+\node[text=sub, font=\scriptsize\itshape, fill=white, inner xsep=6pt] at (\Bc,-0.92)
+  {closed-loop optimization: propose next query, evaluate, update};
+
+\end{tikzpicture}
+\end{document}

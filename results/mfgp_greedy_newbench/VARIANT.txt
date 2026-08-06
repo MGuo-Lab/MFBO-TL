@@ -1,0 +1,1 @@
+const-std (lf_ei_const_std=0.1) | reproduces paper_v1 | MFGP-LF=greedy (argmin mu) | n_seeds=20 base_seed=42 | resumed 2026-05-29 18:04:25.109493

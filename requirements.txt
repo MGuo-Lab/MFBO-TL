@@ -1,0 +1,27 @@
+# Versions PINNED to the reproducible reference environment (paper_v1_py39, Python 3.9).
+# Reproducibility note: the SMILES featurizer uses sklearn PCA with a fixed random_state
+# (see src/benchmark.py), so the molecular-pool features are deterministic; pinning the
+# package versions keeps the descriptor set and numerics fixed across machines.
+# Core
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.13.1
+scikit-learn==1.5.2
+matplotlib
+
+# PyTorch (GH200 / CUDA 12.4+: install from https://download.pytorch.org/whl/cu124)
+torch==2.4.1
+torchvision
+
+# Bayesian optimization
+botorch==0.10.0
+gpytorch==1.11
+
+# Molecular descriptors
+rdkit==2024.3.5
+
+# Optional (post-submission experiments only)
+# scikit-optimize  # used in some baselines
+
+# Statistics cross-check (figures/grid_stats.py self-test only)
+statsmodels
