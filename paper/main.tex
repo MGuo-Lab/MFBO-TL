@@ -280,7 +280,7 @@ The baseline MFGP (the standard autoregressive multi-fidelity GP; Methods) achie
 Branin scenarios, indicating that GP models remain highly effective when
 their inductive bias matches the objective structure. On Branin-Fav and Branin-Unfav (the favourable and unfavourable fidelity scenarios; Methods) the baseline MFGP reached
  mean final regrets of $0.07$ and $0.05$, respectively, ranking first in
-both cases, whereas the best transfer-learning surrogate reached final regrets of $0.43$ and $1.24$
+both cases, whereas the best transfer-learning surrogate reached final regrets of $0.42$ and $1.24$
 (Fig.~\ref{fig:final_regret}; paired Wilcoxon $p = 1.0\times10^{-3}$ and
 $1.3\times10^{-4}$, matched-pairs rank-biserial $r = -0.79$ and $-1.00$, where $r > 0$
 favours transfer learning; Methods). This observation is consistent with the Mat\'{e}rn-5/2 kernel providing a strong smoothness prior for an analytically smooth, two-dimensional objective,
@@ -407,12 +407,12 @@ Because the GP and transfer-learning surrogates used structurally different acqu
 policies under the default protocol, we matched the acquisition policy across both model families to test whether
 the observed advantage of transfer-learning surrogates could be explained by this asymmetry. In the default setting, the baseline MFGP used an uncertainty-driven expected-improvement (EI) acquisition whereas the transfer-learning surrogates used a greedy policy (Methods). We therefore compared matched acquisition settings by running the baseline MFGP under a greedy policy
 and the transfer-learning surrogate under an uncertainty-driven policy using its own Bayesian linear-regression (BLR) predictive
-standard deviation (Fig.~\ref{fig:acquisition}). Using the greedy policy for the baseline MFGP had little effect on performance. Final regret changed only marginally, for example $6.60 \rightarrow 6.71$ on COFs and $0.13 \rightarrow
-0.15$ on polarizability.  Thus matching the acquisition policy did not improve the baseline MFGP, indicating that its limitation arises primarily from the surrogate rather than the acquisition policy. Under this matched greedy policy the transfer-learning surrogate retained
-a large advantage on COFs, achieving approximately an $8\times$ lower regret than the baseline MFGP and a $16\times$ lower regret for the best transfer-learning
-surrogate. Smaller but consistent advantages were also observed on the remaining molecular benchmarks. The transfer-learning
-surrogate showed the opposite behaviour: its performance was strongly sensitive to its acquisition policy. On COFs regret
-increased from $0.88$ under the greedy policy to $6.13$ when its predictive uncertainty was used to drive
+standard deviation (Fig.~\ref{fig:acquisition}). Using the greedy policy for the baseline MFGP had little effect on performance. Final regret changed only marginally, for example $6.55 \rightarrow 6.71$ on COFs and $0.17 \rightarrow
+0.15$ on polarizability.  Thus matching the acquisition policy did not improve the baseline MFGP, indicating that its limitation arises primarily from the surrogate rather than the acquisition policy. Under this matched greedy policy the transfer-learning surrogates retained
+a large advantage on COFs, achieving approximately an $8\times$ lower regret than the baseline MFGP for the median transfer-learning surrogate and a $16\times$ lower regret for the
+best. Smaller but consistent advantages were also observed on the remaining molecular benchmarks. The transfer-learning
+surrogate showed the opposite behaviour: its performance was strongly sensitive to its acquisition policy. On COFs the median regret across the eleven transfer-learning surrogates
+increased from $0.80$ under the greedy policy to $6.13$ when its predictive uncertainty was used to drive
 exploration.
 These results suggest that the baseline MFGP
 posterior \emph{mean} misranks the promising regions in these descriptor spaces, so changing the acquisition policy has limited effect. By contrast, the transfer-learning surrogate appeared to provide a more useful ranking of HF candidates, making performance more dependent on how scarce HF
@@ -577,7 +577,7 @@ The exact GPs, the baseline MFGP and NARGP, became increasingly expensive as the
 budget grew (Supplementary Note~\ref{suppnote:computational_cost}, Supplementary
 Fig.~\ref{suppfig:computing_time}). The sparse variational MFGP required up to
 approximately $45$-fold more FLOPs than the fastest transfer-learning surrogate, for example $5.0$ versus $0.11$ TFLOPs on FreeSolv. 
- The corresponding maximum gaps were approximately $25$-fold for the deep-kernel GP and $11$-fold for the baseline MFGP. On the smallest pools and budgets such as HOPV15 and Park-Unfav, the cubic cost of exact GPs remained negligible; the separation between model families increased as the number of observations grew. Therefore, under the fixed optimization protocol, 
+ The corresponding maximum gaps were approximately $30$-fold for the deep-kernel GP and $11$-fold for the baseline MFGP. On the smallest pools and budgets such as HOPV15 and Park-Unfav, the cubic cost of exact GPs remained negligible; the separation between model families increased as the number of observations grew. Therefore, under the fixed optimization protocol, 
  transfer-learning surrogates provided both lower regret on most molecular and materials benchmarks and more favourable computational scaling. This advantage is particularly relevant to SDL settings, where
 abundant LF data and repeated surrogate updates can make model retraining cost an important component of the closed-loop workflows.
 
@@ -829,9 +829,15 @@ results~\citep{sabanza2025best}.
 %% membership below was corrected to the models actually run on the grid
 %% (TL = Progressive / Knowledge Distillation / Pseudo-Labelling; variants =
 %% deep-kernel + sparse variational, no NARGP).
-%% TODO(authors): still to verify: random-forest configuration, knob
-%% definitions and their calibration, budget and cost ratio used for the grid
-%% runs, and the binning of the displayed maps.
+%% VERIFIED (2026-08-18, against the release package): RF = out-of-fold
+%% KFold(5) RandomForestRegressor(80 trees); knobs = bulk training-set size
+%% (R^2) + top-5% basin demotion (agreement), runners/grid/gen_grid_cells.py;
+%% actual run protocol = budget 50, rho 0.1, warmup 2 HF + 5 LF, seeds 42-51,
+%% uniform across all 126 cells (25 HF / 249 LF per run in every
+%% summary_cell CSV); binning = nearest R^2 grid value x top-10 agreement
+%% rounded to 0.01 (figures/grid_stats.py). The budget sentence below was
+%% corrected accordingly (it previously claimed the polarizability
+%% benchmark's Table-1 settings, B=30 / rho=0.167, which the runs did not use).
 To vary the two properties of LF quality independently, we constructed a
 grid of curated LF sources on the polarizability substrate. Each source was
 derived from out-of-fold random-forest predictions of the HF objective and
@@ -848,8 +854,9 @@ real experimental or simulation biases, which bounds how far the grid's
 conclusions generalize beyond the polarizability substrate. Calibrating the two
 knobs produced $126$ conditions covering $R^2 \approx 0.1$--$0.9$ and agreement
 $0$--$1$, each run for ten seeds under the pool-based optimization loop of
-Section~\ref{sec:meth-loop}, with the budget, cost ratio, and initial-design rule of
-the polarizability benchmark (Table~\ref{tab:benchmarks}) and seeds shared across all
+Section~\ref{sec:meth-loop}, with a total budget of $B = 50$ HF-equivalent units at
+cost ratio $\rho = 0.1$ ($25$ HF and $249$ LF evaluations per run, including an
+initial design of two HF and five LF points) and seeds shared across all
 surrogates within a condition.
 
 Three families were compared pairwise: the transfer-learning family, represented in
@@ -917,6 +924,9 @@ procedure~\citep{demsar2006statistical}: a Friedman test with the nine benchmark
 blocks and surrogates ranked within each benchmark by their seed-mean value (mid-ranks
 for ties), followed by Nemenyi post-hoc comparisons, for which the critical difference
 with fifteen models and nine benchmarks is $7.15$ rank units at $\alpha = 0.05$.
+The reference software environment is Python 3.9 with PyTorch 2.4.1, BoTorch
+0.10.0, GPyTorch 1.11, and SciPy 1.13.1, pinned in the accompanying code
+release (\texttt{requirements.txt}).
 Common and
 model-specific hyperparameters, GP configuration, the
 BLR derivation, synthetic function definitions, and
@@ -939,6 +949,21 @@ M.G.: Conceptualization, Methodology, Writing -- review \& editing.
 J.L.\ and M.G.\ would like to acknowledge financial support from the King's
 College London Net Zero Centre Ph.D.\ Scholarship scheme.
 
+\bmhead{Data availability}
+
+%% TODO(authors): same placeholder repository as Code availability --
+%% confirm/create it before submission and add the Zenodo DOI if one is minted.
+The nine candidate-pool datasets used by every optimization run, the curated
+low-fidelity sources of the controlled fidelity-quality grid, and the result
+files underlying every figure and quoted statistic are available at
+\url{https://github.com/MGuo-Lab/MFBO-TL-Release}, together with build scripts
+that regenerate the pools from their public sources: COFs from
+ref.~\citep{gantzler2023multifidelity}, FreeSolv from
+ref.~\citep{mobley2014freesolv}, polarizability from the Alexandria
+library~\citep{ghahremanpour2018alexandria}, HOPV15 from the Harvard Organic
+Photovoltaic dataset, and Matbench-gap from the Matbench experimental band-gap
+suite.
+
 \bmhead{Code availability}
 
 %% TODO(authors): placeholder repository URL -- confirm/create the public
@@ -946,9 +971,9 @@ College London Net Zero Centre Ph.D.\ Scholarship scheme.
 The code supporting this study is available at
 \url{https://github.com/MGuo-Lab/MFBO-TL-Release}.
 
-\bmhead{Conflict of interest}
+\bmhead{Competing interests}
 
-The authors declare no conflicts of interest.
+The authors declare no competing interests.
 
 \bibliography{references}
 
@@ -1231,7 +1256,7 @@ operations (FLOPs), a hardware-independent measure: total FLOPs of the MFBO
 loop (one surrogate fit plus one pool-wide prediction per iteration, summed over the loop),
 with the Gaussian-process family in salmon and the transfer-learning surrogates in blue.
 The sparse variational (Sparse MFGP) and deep-kernel (DKL) GPs are the most expensive on
-every benchmark, up to roughly $45\times$ and $25\times$ the fastest transfer-learning surrogate; the
+every benchmark, up to roughly $45\times$ and $30\times$ the fastest transfer-learning surrogate; the
 baseline MFGP and NARGP scale as $\mathcal{O}(N^3)$ in the number of observations (measured
 fit-FLOP exponent $k = 3.0$) against $\mathcal{O}(N)$ for the transfer-learning surrogates ($k = 1.0$),
 so the gap widens with the evaluation budget. Panel \textbf{j} summarizes these costs as
@@ -1368,7 +1393,7 @@ The omnibus does not reject rank homogeneity ($\chi^2_{14} = 20.9$, $p = 0.11$),
 pairwise ordering is claimed. The Nemenyi critical difference,
 $\mathrm{CD} = q_{0.05}\sqrt{k(k+1)/(6N)}$ with $k = 15$ surrogates and $N = 9$
 benchmarks, is $7.15$ rank units, which is larger than the entire observed range of
-average ranks ($5.28$ for Curriculum to $11.8$; range $6.52$). The spread of the panel
+average ranks ($5.28$ for Curriculum to $11.8$; range $6.50$). The spread of the panel
 is therefore smaller than the smallest difference the post-hoc test can resolve, so no
 pair of surrogates is separable at this suite size, including the best against the
 worst. The dashed line in Fig.~\ref{fig:final_regret}k marks this critical difference.

@@ -2,9 +2,9 @@
 
 Publication repository for the manuscript
 
-> **Transfer-learning surrogates outperform Gaussian processes in molecular and
-> materials multi-fidelity Bayesian optimization**
-> (npj Computational Materials submission; Springer Nature `sn-jnl` class)
+> **Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
+> Optimization**
+> (Springer Nature `sn-jnl` class)
 
 It contains the manuscript, the canonical result files behind every figure and
 quoted statistic, the scripts that regenerate all of them, and the frozen

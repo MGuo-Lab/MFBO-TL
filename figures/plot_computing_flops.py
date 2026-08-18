@@ -55,10 +55,14 @@ rows = [{'benchmark': b, 'model': m, 'flops': recon(m, b, 'fit') + recon(m, b, '
 allt = pd.DataFrame(rows); allt['disp'] = allt.model.replace(RENAME)
 allt.to_csv(OUT / 'computing_flops_values.csv', index=False)
 
-print('\nTotal BO-loop FLOPs (TFLOPs), Sparse vs cheapest DNN:')
+print('\nTotal BO-loop FLOPs (TFLOPs), Sparse vs cheapest TL surrogate:')
 for b in BENCHES:
     g = allt[allt.benchmark == b]
-    sp = g[g.model == 'Sparse MFGP'].flops.values[0]; ch = g.flops.min()
+    # cheapest over the TL family only -- the manuscript's "fastest
+    # transfer-learning surrogate" (a global min would pick NARGP on the
+    # smallest pools and inflate the ratio)
+    sp = g[g.model == 'Sparse MFGP'].flops.values[0]
+    ch = g[~g.model.isin(GP_FAMILY)].flops.min()
     print(f'   {b:14s} cheapest {ch/TFLOP:5.2f}  MFGP {g[g.model=="MFGP"].flops.values[0]/TFLOP:5.2f}  '
           f'Sparse {sp/TFLOP:5.2f} TFLOP ({sp/ch:4.0f}x cheapest)')
 
