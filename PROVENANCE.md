@@ -10,7 +10,7 @@ in their path-resolution lines (plus output redirection into `figures/out/`).
 
 | Source | State at copy time |
 |---|---|
-| `Jaewook-MFBO-TL-Paper` (github.com/jaewook-lee4014/Jaewook-MFBO-TL-Paper) | commit `63d2262` ("Add a submission package that carries main.bbl") — supplied everything under `paper/` |
+| `Jaewook-MFBO-TL-Paper` (github.com/jaewook-lee4014/Jaewook-MFBO-TL-Paper) | commit `63d2262` ("Add a submission package that carries main.bbl") — supplied everything under `paper/`; `main.tex` re-synced 2026-08-18 to `e1628a8` (merge of PR #1: author contributions, funding, code availability, and COI backmatter) |
 | `MFBO-TL-Paper` (local only, never pushed) | branch `fix/lf-ei-const-std-restore-original` @ `7b9d476`; the figure scripts and most result CSVs were **untracked** in that repo — this repo is their first version control |
 
 ## Path map (old → new)
