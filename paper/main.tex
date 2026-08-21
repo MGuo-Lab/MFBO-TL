@@ -289,11 +289,9 @@ favours transfer learning; Methods). This observation is consistent with the Mat
 allowing the GP posterior to model the surface accurately from relatively few observations.
 The advantage was specific to the Branin family and did not extend across all synthetic benchmarks. On the four-dimensional Park functions, simple regret rapidly approached zero for most methods after only a small number of HF evaluations (Fig.~\ref{fig:final_regret}d,e), making these benchmarks weakly
  discriminative  at the budget considered. Several transfer-learning surrogates had already reached zero regret on Park-Fav whereas the baseline MFGP had not, placing it
-in the lower half of the ranking on both Park scenarios. Therefore, the GP advantage on
-synthetic objectives was confined to the smooth, two-dimensional Branin
+in the lower half of the ranking on both Park scenarios. The GP advantage on
+synthetic objectives was therefore confined to the smooth, two-dimensional Branin
 functions, rather than synthetic benchmarks in general.
-These results suggest that GPs are highly competitive when
-the kernel prior is well matched to the structure of the objective, but that this advantage is problem-dependent rather than universal.
 
 \subsection{Transfer-learning surrogates outperform on molecular and materials
 benchmarks}\label{sec:res-chem}
@@ -397,10 +395,7 @@ interquartile range $0.91$--$1.00$). Third, the advantage is organized
 along the agreement axis rather than the correlation axis: at fixed $R^2$ it grows
 steeply as the top-10 agreement falls, whereas at fixed agreement it is nearly flat
 across the $R^2$ range (marginal profiles in Supplementary
-Fig.~\ref{suppfig:family_split}). The property that decides when a transfer-learned
-surrogate pays off is therefore not the global correlation commonly used to
-characterize an LF source, but whether that source preserves the ordering of
-the best candidates.
+Fig.~\ref{suppfig:family_split}).
 
 \subsection{The advantage stems from the surrogate, not the acquisition
 policy}\label{sec:res-acquisition}
@@ -409,15 +404,15 @@ Because the GP and transfer-learning surrogates used structurally different acqu
 policies under the default protocol, we matched the acquisition policy across both model families to test whether
 the observed advantage of transfer-learning surrogates could be explained by this asymmetry. In the default setting, the baseline MFGP used an uncertainty-driven expected-improvement (EI) acquisition whereas the transfer-learning surrogates used a greedy policy (Methods). We therefore compared matched acquisition settings by running the baseline MFGP under a greedy policy
 and the transfer-learning surrogate under an uncertainty-driven policy using its own Bayesian linear-regression (BLR) predictive
-standard deviation (Fig.~\ref{fig:acquisition}). Using the greedy policy for the baseline MFGP had little effect on performance. Final regret changed only marginally, for example $6.55 \rightarrow 6.71$ on COFs and $0.17 \rightarrow
-0.14$ on polarizability.  Thus matching the acquisition policy did not improve the baseline MFGP, indicating that its limitation arises primarily from the surrogate rather than the acquisition policy. Under this matched greedy policy the transfer-learning surrogates retained
+standard deviation (Fig.~\ref{fig:acquisition}). Switching the baseline MFGP to the greedy policy changed its final regret only marginally, for example $6.55 \rightarrow 6.71$ on COFs and $0.17 \rightarrow
+0.14$ on polarizability, so its limitation arises from the surrogate and not from the acquisition policy. Under this matched greedy policy the transfer-learning surrogates retained
 a large advantage on COFs, achieving approximately an $8\times$ lower regret than the baseline MFGP for the median transfer-learning surrogate and a $16\times$ lower regret for the
 best. Smaller but consistent advantages were also observed on the remaining molecular benchmarks. The transfer-learning
 surrogate showed the opposite behaviour: its performance was strongly sensitive to its acquisition policy. On COFs the median regret across the eleven transfer-learning surrogates
 increased from $0.80$ under the greedy policy to $6.13$ when its predictive uncertainty was used to drive
 exploration.
 These results suggest that the baseline MFGP
-posterior \emph{mean} misranks the promising regions in these descriptor spaces, so changing the acquisition policy has limited effect. By contrast, the transfer-learning surrogate appeared to provide a more useful ranking of HF candidates, making performance more dependent on how scarce HF
+posterior \emph{mean} misranks the promising regions in these descriptor spaces. By contrast, the transfer-learning surrogate appeared to provide a more useful ranking of HF candidates, making performance more dependent on how scarce HF
 evaluations were allocated between exploitation and exploration. We therefore examined this sensitivity using a broader acquisition-function portfolio.
 
 \begin{figure}[t]
@@ -491,8 +486,7 @@ it on FreeSolv and polarizability.
 family in warm colours, transfer-learning surrogates in cool colours; legend); axes are
 the low-fidelity expected calibration error and the final regret, one panel per
 benchmark. The Pearson correlation is negative on every benchmark (from $-0.88$ on COFs
-to $-0.08$ on HOPV15), so the best-calibrated surrogates (the Gaussian-process family)
-are, if anything, the worst optimizers on the molecular-descriptor benchmarks. The two
+to $-0.08$ on HOPV15). The two
 Park benchmarks (\textbf{g},\textbf{h}) saturate to $\approx 0$ regret by the
 full budget (Park-Fav additionally exhausts its $256$-point candidate pool), so both
 are evaluated at the early decision budget $B=10$, consistent with the regret figures
@@ -500,7 +494,7 @@ are evaluated at the early decision budget $B=10$, consistent with the regret fi
 \label{fig:portfolio}\label{fig:calibration}
 \end{figure}
 
-Calibration quality was a poor predictor of optimization performance: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from $-0.88$ on COFs to $-0.08$ on HOPV15 (Fig.~\ref{fig:calibration}e--m). If anything, the best-calibrated surrogates, including the entire GP family, were the weakest optimizers on the molecular-descriptor benchmarks, showing that better-calibrated uncertainty did not translate into better optimization. This is consistent with uncertainty acting as a secondary, benchmark-dependent factor rather than a primary driver of performance.
+Calibration quality was a poor predictor of optimization performance: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from $-0.88$ on COFs to $-0.08$ on HOPV15 (Fig.~\ref{fig:calibration}e--m). If anything, the best-calibrated surrogates, including the entire GP family, were the weakest optimizers on the molecular-descriptor benchmarks, showing that better-calibrated uncertainty did not translate into better optimization.
 The bounded $\tanh$ activation used throughout was likewise justified by
 optimization rather than calibration. In a
 matched $\tanh$-versus-ReLU ablation on the molecular-descriptor benchmarks, calibration error was nearly identical for the two activations ($0.30$
@@ -522,7 +516,7 @@ Branin, high global LF--HF correlation conceals poor agreement among the top-ran
 rank correlation of $0.998$ but a screening regret of $4.52$. In this setting, a learned surrogate was
 essential; the best transfer-learning surrogate achieved a regret of $0.41$, substantially outperforming the surrogate-free screen. Regime membership could not be inferred from the global correlation alone. COFs and
 polarizability both had $R^2 \approx 0.99$ but their screening regrets differed by approximately
-$50\times$. Thus, the need for a surrogate depends less on global LF--HF correlation than on whether the LF proxy preserves the near-optimal region. The
+$50\times$. The
 transfer-learning surrogate was a robust choice as it matched the surrogate-free screen when the proxy already identified the optimum and substantially improved performance when the proxy failed near the top of the ranking. Both HOPV15 and Matbench-gap fall in
 Regime~B. An LF screen produced a regret of $3.90$ on HOPV15 where the Scharber proxy
 was nearly uninformative and $0.91$ on Matbench-gap. These results indicate that  surrogate learning is warranted,
@@ -570,18 +564,15 @@ eleven transfer-learning surrogates exhibited linear scaling with the number of 
 fit-FLOP exponent of $k = 1.0$ for cost versus training-set size. This reflects the use of fixed-architecture
 neural network training. By contrast, the exact GPs, the baseline MFGP and NARGP, showed cubic scaling
 ($k = 3.0$), consistent with exact GP inference and marginal-likelihood optimization. 
-The sparse variational MFGP and the deep-kernel GP occupied an intermediate computational regime (Fig.~\ref{fig:scaling_law}). The difference in scaling produced a clear crossover in computational cost. The fitted cost curves intersected at $N \approx 66$; below this point, the
-GPs were cheaper to fit whereas above it  the transfer-learning surrogates became more efficient. Because the fitted scaling exponents differed by about $1.5$ between the model families, the computational gap widened with increasing data, 
-reaching approximately $5$ times at $N = 200$ and $10$ times at $N = 300$.
+The sparse variational MFGP and the deep-kernel GP occupied an intermediate computational regime (Fig.~\ref{fig:scaling_law}). The fitted cost curves intersected at a break-even size of $N \approx 66$: below it the
+GPs were cheaper to fit, and above it the transfer-learning surrogates were cheaper by a margin that widened to roughly $10\times$ at $N = 300$.
 Integrated over the optimization loop, the sparse variational MFGP
 and the deep-kernel GP were the most expensive methods on every benchmark.
 The exact GPs, the baseline MFGP and NARGP, became increasingly expensive as the evaluation
 budget grew (Supplementary Note~\ref{suppnote:computational_cost}, Supplementary
 Fig.~\ref{suppfig:computing_time}). The sparse variational MFGP required up to
-approximately $45$-fold more FLOPs than the fastest transfer-learning surrogate, for example $5.0$ versus $0.11$ TFLOPs on FreeSolv. 
- The corresponding maximum gaps were approximately $30$-fold for the deep-kernel GP and $11$-fold for the baseline MFGP. On the smallest pools and budgets such as HOPV15 and Park-Unfav, the cubic cost of exact GPs remained negligible; the separation between model families increased as the number of observations grew. Therefore, under the fixed optimization protocol, 
- transfer-learning surrogates provided both lower regret on most molecular and materials benchmarks and more favourable computational scaling. This advantage is particularly relevant to SDL settings, where
-abundant LF data and repeated surrogate updates can make model retraining cost an important component of the closed-loop workflows.
+approximately $45$-fold more FLOPs than the fastest transfer-learning surrogate ($5.0$ versus $0.11$ TFLOPs on FreeSolv), with corresponding maxima of $30$-fold for the deep-kernel GP and $11$-fold for the baseline MFGP. On the smallest pools and budgets such as HOPV15 and Park-Unfav, the cubic cost of exact GPs remained negligible; the separation between model families increased as the number of observations grew. Therefore, under the fixed optimization protocol, 
+ transfer-learning surrogates provided both lower regret on most molecular and materials benchmarks and more favourable computational scaling.
 
 \section{Discussion}\label{sec:discussion}
 
@@ -613,9 +604,8 @@ regime, not of a particular acquisition. On other high-correlation chemistry ben
 (FreeSolv, polarizability), by contrast, a sampling-based acquisition (Thompson sampling) beat the
 greedy policy on every surrogate, while the improvement-based acquisitions won least often on average.
 Calibration quality, measured by expected calibration error, did not predict
-optimization performance: across all fifteen surrogates its correlation with regret was
-negative on every benchmark (from $-0.88$ on COFs to $-0.08$ on HOPV15), so the
-best-calibrated surrogates (the GP family) were, if anything, the worst
+optimization performance: its correlation with regret was negative on every benchmark, so the
+best-calibrated surrogates were, if anything, the worst
 optimizers on the molecular-descriptor tasks. We interpret this through the strong-transfer regime
 that often characterizes SDL pipelines: when an abundant LF signal already orders
 candidates well, a high-quality posterior mean is on average more valuable than
@@ -628,8 +618,7 @@ preferable to improvement-based ones, with a benefit that is benchmark-dependent
 The benchmark also clarifies when a learned surrogate is needed at all. Our
 screening-regret analysis separated tasks in which a surrogate-free LF screen is
 near-optimal (Regime~A) from those in which it fails despite a high global correlation
-(Regime~B), and showed that regime membership cannot be inferred from the correlation
-alone. Transfer-learning surrogates were the robust choice because they matched the
+(Regime~B). Transfer-learning surrogates were the robust choice because they matched the
 non-learning bound where a surrogate was unnecessary and decisively beat it where one was
 essential. Transfer learning is therefore not a universally superior method but the dependable
 default for the high-dimensional molecular and materials pools where SDLs operate.
