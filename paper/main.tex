@@ -660,7 +660,11 @@ fidelity selection; the residual parameterization extends naturally to hierarchi
 fidelities, which we leave to future work. The transfer-learning surrogates use fixed, modest-capacity
 multilayer perceptrons on precomputed descriptors reduced by PCA;
 larger architectures or learned molecular representations could further widen the gap but
-were deliberately excluded to keep the comparison fair. Our evaluation is also retrospective,
+were deliberately excluded to keep the comparison fair. The comparison also leaves the
+transfer-learning hyperparameters fixed while the GP baselines re-fit their kernel
+hyperparameters by marginal-likelihood maximization at every iteration; this asymmetry
+is conservative where transfer learning wins, but the GP advantage on the smooth
+synthetic objectives should be read with it in mind. Our evaluation is also retrospective,
 optimizing over fixed candidate pools that emulate the closed loop rather than driving a live
 autonomous platform, so the surrogate ranking we report remains to be confirmed in
 deployment. Finally, the comparison is against
@@ -816,9 +820,10 @@ and computed hydration free energies~\citep{mobley2014freesolv}. The polarizabil
 $1{,}134$ molecules from the Alexandria library with experimental versus Hartree--Fock
 values~\citep{ghahremanpour2018alexandria, fare2022multi}. HOPV15 contained $240$
 organic-photovoltaic donor molecules, using experimental power conversion efficiency as the HF target
-and a Scharber-model estimate from computed frontier orbitals as the LF proxy.
+and a Scharber-model estimate from computed frontier orbitals as the LF
+proxy~\citep{lopez2016harvard}.
 Matbench-gap contained $3{,}347$ inorganic compositions with experimental and computed band
-gaps. Molecular benchmarks were encoded as RDKit or composition-based descriptors,
+gaps~\citep{dunn2020benchmarking}. Molecular benchmarks were encoded as RDKit or composition-based descriptors,
 standardized, and reduced to ten dimensions by PCA once at
 initialization; maximization targets were negated. Cost ratios were matched to the originating
 studies to enable indirect comparison with prior single- and multi-fidelity GP
@@ -964,8 +969,8 @@ that regenerate the pools from their public sources: COFs from
 ref.~\citep{gantzler2023multifidelity}, FreeSolv from
 ref.~\citep{mobley2014freesolv}, polarizability from the Alexandria
 library~\citep{ghahremanpour2018alexandria}, HOPV15 from the Harvard Organic
-Photovoltaic dataset, and Matbench-gap from the Matbench experimental band-gap
-suite.
+Photovoltaic dataset~\citep{lopez2016harvard}, and Matbench-gap from the Matbench
+experimental band-gap suite~\citep{dunn2020benchmarking}.
 
 \bmhead{Code availability}
 
