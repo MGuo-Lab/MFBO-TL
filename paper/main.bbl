@@ -261,4 +261,19 @@
 \newblock \emph{\bibinfo{journal}{npj Computational Materials}}
   \textbf{\bibinfo{volume}{8}}, \bibinfo{pages}{257} (\bibinfo{year}{2022}).
 
+\bibitem{lopez2016harvard}
+\bibinfo{author}{Lopez, S.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{The harvard organic photovoltaic dataset}.
+\newblock \emph{\bibinfo{journal}{Scientific Data}}
+  \textbf{\bibinfo{volume}{3}}, \bibinfo{pages}{160086} (\bibinfo{year}{2016}).
+
+\bibitem{dunn2020benchmarking}
+\bibinfo{author}{Dunn, A.}, \bibinfo{author}{Wang, Q.},
+  \bibinfo{author}{Ganose, A.}, \bibinfo{author}{Dopp, D.} \&
+  \bibinfo{author}{Jain, A.}
+\newblock \bibinfo{title}{Benchmarking materials property prediction methods:
+  the {Matbench} test set and {Automatminer} reference algorithm}.
+\newblock \emph{\bibinfo{journal}{npj Computational Materials}}
+  \textbf{\bibinfo{volume}{6}}, \bibinfo{pages}{138} (\bibinfo{year}{2020}).
+
 \end{thebibliography}
