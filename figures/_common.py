@@ -34,6 +34,43 @@ def short(name):
     return SHORT_NAMES.get(name, name)
 
 
+# Abbreviation codes for panels whose y-axes repeat all fifteen surrogates
+# (Fig 1 b-k): even the compact names above consume half of each panel, so
+# the axes carry codes and the figure defines them in a key strip beneath
+# the panels (2026-08-21, author request).
+CODE_NAMES = {'MFGP': 'MFGP',
+              'NARGP': 'NARGP',
+              'DKL Multi-Fidelity': 'DKL',
+              'Sparse MFGP': 'SV-MFGP',
+              'Sequential': 'Seq',
+              'Progressive': 'Prog',
+              'Curriculum': 'Curr',
+              'Pretrain-then-Joint Training': 'PtJ',
+              'Stop-Gradient Joint Training': 'SGJ',
+              'End-to-End Joint Training': 'E2E',
+              'Knowledge Distillation': 'KD',
+              'Domain Adaptation (MMD)': 'MMD',
+              'Soft Parameter Sharing': 'SPS',
+              'Pseudo-Labelling': 'PL',
+              'Adapter': 'Adpt'}
+
+
+def code(name):
+    return CODE_NAMES.get(name, name)
+
+
+# One key line per family, reused by every figure that shows the codes.
+CODE_KEY_TL = ('TL surrogates:  Seq = Sequential · Prog = Progressive · '
+               'Curr = Curriculum · PtJ = Pretrain-then-Joint · '
+               'SGJ = Stop-Gradient Joint · E2E = End-to-End Joint · '
+               'KD = Knowledge Distillation')
+CODE_KEY_TL2 = ('MMD = Domain Adaptation (MMD) · SPS = Soft Parameter '
+                'Sharing · PL = Pseudo-Labelling · Adpt = Adapter')
+CODE_KEY_GP = ('GP family:  MFGP = baseline MFGP · NARGP = nonlinear '
+               'autoregressive GP · DKL = deep-kernel GP · '
+               'SV-MFGP = sparse variational MFGP')
+
+
 # Every figure is drawn wider than its final print width, and by a DIFFERENT
 # factor (1.3x to 5.2x), so a "title + 1pt" letter prints at 3.3-10.3pt
 # depending on the figure. To make all panel letters the SAME physical size

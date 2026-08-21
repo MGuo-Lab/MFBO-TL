@@ -129,20 +129,21 @@ def main():
         ax.barh(y, means, xerr=ses, color=colors, capsize=2, alpha=0.92,
                 edgecolor='white', height=0.68, linewidth=0.7,
                 error_kw=dict(elinewidth=1.0, capthick=1.0))
-        ax.set_yticks(y)
-        ax.set_yticklabels(labels, fontsize=TICK_SIZE)
+        # condition names live in the shared bottom legend (colour-coded);
+        # per-panel y tick labels removed so the bars use the full panel width
+        ax.set_yticks([])
         bb = EARLY_B if b in EARLY else BUDGET[b]
         ax.set_title(f'{b} (B = {bb})', fontsize=TITLE_SIZE, loc='left')
-        add_panel_letter(ax, LETTERS[idx], x=-0.45, y=1.02, size=LETTER_PT)
-        ax.set_xlabel('Final Regret (Mean ± SE)', fontsize=LABEL_SIZE)
+        add_panel_letter(ax, LETTERS[idx], x=-0.17, y=1.02, size=LETTER_PT)
+        ax.set_xlabel('Final regret', fontsize=LABEL_SIZE)
         ax.tick_params(axis='both', labelsize=TICK_SIZE)
         ax.grid(axis='x', alpha=0.3, linewidth=0.5)
         xmax = max([m for m in means if np.isfinite(m)] + [1e-6])
         for yi, (m, se) in zip(y, zip(means, ses)):
             if np.isfinite(m):
-                ax.text(m + se + xmax * 0.035, yi, _fmt(m), va='center',
+                ax.text(m + se + xmax * 0.05, yi, _fmt(m), va='center',
                         fontsize=TICK_SIZE - 1, color='#333333')
-        ax.set_xlim(0, xmax * 1.28)
+        ax.set_xlim(0, xmax * 1.34)
 
     for j in range(len(BENCHES), nrows * NCOLS):
         axes[j // NCOLS, j % NCOLS].axis('off')
