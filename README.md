@@ -53,8 +53,9 @@ python make_si_star_sensitivity.py   # Supp star-sensitivity figure + SI table
 
 Outputs appear in `figures/out/`; compare against the canonical
 `paper/paper_figures/`. `fig1_overview.png` is the one hand-made asset (no
-generating script; the orphaned TikZ source is kept as
-`figures/fig1_overview.tex` for provenance — do not regenerate from it).
+generating script; it is the three-step graphical abstract used as Fig. 1a).
+`figures/fig1_overview.tex` is the TikZ source of an *earlier* schematic that
+the current PNG supersedes — kept for provenance only, do not regenerate from it.
 
 ## Reproduce the quoted statistics
 
