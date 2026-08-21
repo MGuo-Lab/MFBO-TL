@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import NEWFIGS, RESULTS, add_panel_letter, letter_pt, save_dual
 
 MFGP_COLOR, HIGHLIGHT_COLOR = '#f2aa84', '#4e95d9'
-TITLE_SIZE, LABEL_SIZE, TICK_SIZE, LEGEND_SIZE = 16, 14, 12, 12
+TITLE_SIZE, LABEL_SIZE, TICK_SIZE, LEGEND_SIZE = 14, 12, 11, 12
 
 DNN = 'DNGO-Gradient'
 BENCHES = ['Branin-Fav', 'Branin-Unfav', 'Park-Fav', 'Park-Unfav', 'COFs',
@@ -44,8 +44,9 @@ COND = [
     ('TL · EI',       '#9bb8d4', ''),
 ]
 LETTERS = list('abcdefghi')
-# uniform 8 pt print size: tight PDF width 824.9 mm, print width 160 mm
-LETTER_PT = letter_pt(824.9, 160)
+# uniform 8 pt print size: tight PDF width ~332 mm, print width 160 mm
+# (2026-08-18 print-size re-export: canvas 32.5x10 in -> 13x5.4 in, ~2.1x)
+LETTER_PT = letter_pt(332.0, 160)
 
 
 def _load(p):
@@ -116,7 +117,7 @@ def main():
             ]
 
     nrows = math.ceil(len(BENCHES) / NCOLS)
-    fig, axes = plt.subplots(nrows, NCOLS, figsize=(6.5 * NCOLS, 5 * nrows))
+    fig, axes = plt.subplots(nrows, NCOLS, figsize=(2.6 * NCOLS, 2.7 * nrows))
     axes = np.atleast_2d(axes)
     labels = [c[0] for c in COND]
     colors = [c[1] for c in COND]
@@ -125,23 +126,23 @@ def main():
         means = [d[0] for d in data[b]]
         ses = [d[1] for d in data[b]]
         y = np.arange(len(labels))[::-1]
-        ax.barh(y, means, xerr=ses, color=colors, capsize=4, alpha=0.92,
-                edgecolor='white', height=0.68, linewidth=1.0,
-                error_kw=dict(elinewidth=1.2, capthick=1.2))
+        ax.barh(y, means, xerr=ses, color=colors, capsize=2, alpha=0.92,
+                edgecolor='white', height=0.68, linewidth=0.7,
+                error_kw=dict(elinewidth=1.0, capthick=1.0))
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=TICK_SIZE)
         bb = EARLY_B if b in EARLY else BUDGET[b]
-        ax.set_title(f'{b} (Budget = {bb})', fontsize=TITLE_SIZE)
-        add_panel_letter(ax, LETTERS[idx], x=-0.26, y=1.02, size=LETTER_PT)
-        ax.set_xlabel('Final Regret (Mean ± SE, lower = better)', fontsize=LABEL_SIZE)
+        ax.set_title(f'{b} (B = {bb})', fontsize=TITLE_SIZE, loc='left')
+        add_panel_letter(ax, LETTERS[idx], x=-0.45, y=1.02, size=LETTER_PT)
+        ax.set_xlabel('Final Regret (Mean ± SE)', fontsize=LABEL_SIZE)
         ax.tick_params(axis='both', labelsize=TICK_SIZE)
         ax.grid(axis='x', alpha=0.3, linewidth=0.5)
         xmax = max([m for m in means if np.isfinite(m)] + [1e-6])
         for yi, (m, se) in zip(y, zip(means, ses)):
             if np.isfinite(m):
-                ax.text(m + se + xmax * 0.015, yi, _fmt(m), va='center',
+                ax.text(m + se + xmax * 0.035, yi, _fmt(m), va='center',
                         fontsize=TICK_SIZE - 1, color='#333333')
-        ax.set_xlim(0, xmax * 1.25)
+        ax.set_xlim(0, xmax * 1.28)
 
     for j in range(len(BENCHES), nrows * NCOLS):
         axes[j // NCOLS, j % NCOLS].axis('off')
@@ -151,7 +152,7 @@ def main():
                frameon=True, fancybox=False, edgecolor='gray',
                bbox_to_anchor=(0.5, -0.02))
     # suptitle removed per the npj re-lettering instruction (caption replaces it)
-    plt.tight_layout(w_pad=3.0, h_pad=3.5, rect=(0, 0.04, 1, 1))
+    plt.tight_layout(w_pad=1.2, h_pad=1.4, rect=(0, 0.05, 1, 1))
     save_dual(fig, NEWFIGS / 'A6_acquisition_matrix')
     plt.close(fig)
 

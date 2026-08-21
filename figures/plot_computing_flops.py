@@ -14,6 +14,9 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
+import sys
+sys.path.insert(0, str(HERE))
+from _common import short
 OUT = HERE / 'out'
 OUT.mkdir(exist_ok=True)
 PROF = REPO / 'results' / 'flop_profile' / 'flop_profile.csv'
@@ -28,7 +31,9 @@ RENAME = {'DNGO-Joint': 'Stop-Gradient Joint Training', 'DNGO-Gradient': 'End-to
           'Pseudo-Labeling': 'Pseudo-Labelling'}
 SALMON, BLUE = '#f2aa84', '#4e95d9'
 ABC = [f'({c})' for c in 'abcdefghijk']
-TITLE, LABEL, TICK = 15, 13, 11
+# 2026-08-18 print-size re-export: 30x11 in -> 15x7 in (~2.2x print width),
+# compact tick names from _common.short
+TITLE, LABEL, TICK = 15, 13, 12
 TFLOP = 1e12
 
 d = pd.read_csv(PROF); d = d[d.ok == 1]
@@ -66,18 +71,18 @@ for b in BENCHES:
     print(f'   {b:14s} cheapest {ch/TFLOP:5.2f}  MFGP {g[g.model=="MFGP"].flops.values[0]/TFLOP:5.2f}  '
           f'Sparse {sp/TFLOP:5.2f} TFLOP ({sp/ch:4.0f}x cheapest)')
 
-fig, axes = plt.subplots(2, 5, figsize=(30, 11))
+fig, axes = plt.subplots(2, 5, figsize=(15, 7.0))
 for i, b in enumerate(BENCHES):
     ax = axes[i // 5, i % 5]; g = allt[allt.benchmark == b].sort_values('flops')
     y = np.arange(len(g))
     ax.barh(y, g.flops / TFLOP, color=[SALMON if m in GP_FAMILY else BLUE for m in g.model],
             alpha=0.9, height=0.72, edgecolor='none')
     for yi, (_, r) in zip(y, g.iterrows()):
-        ax.text(r.flops / TFLOP, yi, f' {r.flops/TFLOP:.2f}', va='center', ha='left', fontsize=8, color='#333')
-    ax.set_yticks(y); ax.set_yticklabels(g.disp, fontsize=TICK)
-    ax.set_title(f'{ABC[i]} {b}', fontsize=TITLE)
-    ax.set_xlabel('Compute per optimization (TFLOPs)', fontsize=LABEL)
-    ax.set_xlim(0, g.flops.max() / TFLOP * 1.18); ax.tick_params(labelsize=TICK)
+        ax.text(r.flops / TFLOP, yi, f' {r.flops/TFLOP:.2f}', va='center', ha='left', fontsize=10, color='#333')
+    ax.set_yticks(y); ax.set_yticklabels([short(m) for m in g.disp], fontsize=TICK)
+    ax.set_title(f'{ABC[i]} {b}', fontsize=TITLE, loc='left')
+    ax.set_xlabel('Total compute (TFLOPs)', fontsize=LABEL)
+    ax.set_xlim(0, g.flops.max() / TFLOP * 1.45); ax.tick_params(labelsize=TICK)
     ax.grid(axis='x', alpha=0.3, lw=0.5)
 # average-rank panel (panel j): rank surrogates by total compute within each
 # benchmark (lower = cheaper), then average across all nine. All 15 surrogates
@@ -94,17 +99,17 @@ y = np.arange(len(avg))
 ax.barh(y, avg['rank'], color=[SALMON if m in GP_FAMILY else BLUE for m in avg.model],
         alpha=0.9, height=0.72, edgecolor='none')
 for yi, r in zip(y, avg['rank']):
-    ax.text(r, yi, f' {r:.1f}', va='center', ha='left', fontsize=8, color='#333')
-ax.set_yticks(y); ax.set_yticklabels(avg.disp, fontsize=TICK)
-ax.set_title(f'{ABC[len(BENCHES)]} Average Rank (all benchmarks)', fontsize=TITLE)
-ax.set_xlabel('Average Compute Rank (lower = cheaper)', fontsize=LABEL)
-ax.set_xlim(0, avg['rank'].max() * 1.18); ax.tick_params(labelsize=TICK)
+    ax.text(r, yi, f' {r:.1f}', va='center', ha='left', fontsize=10, color='#333')
+ax.set_yticks(y); ax.set_yticklabels([short(m) for m in avg.disp], fontsize=TICK)
+ax.set_title(f'{ABC[len(BENCHES)]} Average Rank', fontsize=TITLE, loc='left')
+ax.set_xlabel('Average compute rank', fontsize=LABEL)
+ax.set_xlim(0, avg['rank'].max() * 1.45); ax.tick_params(labelsize=TICK)
 ax.grid(axis='x', alpha=0.3, lw=0.5)
 fig.legend(handles=[Patch(fc=SALMON, label='Gaussian-process family'),
                     Patch(fc=BLUE, label='Transfer-learning surrogates')],
            loc='lower center', ncol=2, fontsize=13, frameon=True, fancybox=False,
            edgecolor='gray', handlelength=2.4, labelspacing=1.0, bbox_to_anchor=(0.5, -0.005))
-plt.tight_layout(w_pad=3.0, h_pad=3.0, rect=(0, 0.035, 1, 1))
+plt.tight_layout(w_pad=1.4, h_pad=1.4, rect=(0, 0.045, 1, 1))
 # regenerated figure lands in figures/out; compare against paper/paper_figures
 for stem in (OUT / 'computing_time',):
     fig.savefig(f'{stem}.pdf', bbox_inches='tight', facecolor='white')

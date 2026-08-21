@@ -16,6 +16,23 @@ RENAME_MAP = {'DNGO-Joint': 'Stop-Gradient Joint Training',
               'DNGO-Gradient': 'End-to-End Joint Training',
               'Two-Stage Joint': 'Pretrain-then-Joint Training'}
 
+# Compact display names for AXIS TICK LABELS only (2026-08-18 print-size
+# re-export): the full paper names stay in captions/legends/text, but a
+# 27-character name repeated on ten y-axes cannot reach a 5.5 pt print size
+# inside a five-column grid. Data keys are never shortened.
+SHORT_NAMES = {'Knowledge Distillation': 'Knowledge Distill.',
+               'Domain Adaptation (MMD)': 'Domain Adapt. (MMD)',
+               'Soft Parameter Sharing': 'Soft Param. Sharing',
+               'Pretrain-then-Joint Training': 'Pretrain-then-Joint',
+               'Stop-Gradient Joint Training': 'Stop-Gradient Joint',
+               'End-to-End Joint Training': 'End-to-End Joint',
+               'DKL Multi-Fidelity': 'Deep-Kernel GP',
+               'MFGP': 'Baseline MFGP'}
+
+
+def short(name):
+    return SHORT_NAMES.get(name, name)
+
 
 # Every figure is drawn wider than its final print width, and by a DIFFERENT
 # factor (1.3x to 5.2x), so a "title + 1pt" letter prints at 3.3-10.3pt

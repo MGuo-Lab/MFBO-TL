@@ -20,9 +20,11 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _common import NEWFIGS, RESULTS, RENAME_MAP, add_panel_letter, letter_pt, save_dual
+from _common import (NEWFIGS, RESULTS, RENAME_MAP, add_panel_letter,
+                     letter_pt, save_dual, short)
 
-TITLE_SIZE, LABEL_SIZE, TICK_SIZE, LEGEND_SIZE = 16, 14, 12, 12
+# 2026-08-18 print-size re-export: 26x10 in -> 15.5x6.4 in (~2.3x print width)
+TITLE_SIZE, LABEL_SIZE, TICK_SIZE, LEGEND_SIZE = 14, 12, 11, 11
 HIGHLIGHT_COLOR = '#4e95d9'
 DEFAULT_PALETTE = ['#2ca02c', '#d62728', '#9467bd', '#8c564b',
                    '#e377c2', '#7f7f7f', '#bcbd22', '#17becf',
@@ -45,8 +47,8 @@ for i, m in enumerate(TL_MODELS):
     MODEL_COLOR[m] = DEFAULT_PALETTE[i % len(DEFAULT_PALETTE)]
 
 LETTERS = list('efghijklm')     # (a-i) -> (e-m)
-# uniform 8 pt print size: tight PDF width 657.8 mm, print width 174 mm
-LETTER_PT = letter_pt(657.8, 174)
+# uniform 8 pt print size: tight PDF width ~394 mm, print width 174 mm
+LETTER_PT = letter_pt(394.0, 174)
 
 
 def load_summary():
@@ -70,7 +72,7 @@ def load_summary():
 def main():
     summary = load_summary()
     present = [m for m in MODELS if m in set(summary['model'])]
-    fig, axes = plt.subplots(2, 5, figsize=(26, 10))
+    fig, axes = plt.subplots(2, 5, figsize=(15.5, 6.4))
     axes = axes.ravel()
     for idx, b in enumerate(BENCHES):
         ax = axes[idx]
@@ -82,7 +84,7 @@ def main():
             if pd.isna(row['lf_ece']):
                 continue
             ax.scatter(row['lf_ece'], row['final_regret'],
-                       s=130, alpha=0.9, edgecolor='black', linewidth=0.6,
+                       s=55, alpha=0.9, edgecolor='black', linewidth=0.5,
                        color=MODEL_COLOR.get(row['model'], '#777777'), zorder=3)
         if len(per_model.dropna()) > 2:
             r = per_model[['lf_ece', 'final_regret']].dropna().corr().iloc[0, 1]
@@ -94,20 +96,20 @@ def main():
         ax.set_xlabel('LF ECE (held-out)', fontsize=LABEL_SIZE)
         if idx % 5 == 0:
             ax.set_ylabel('Final BO regret', fontsize=LABEL_SIZE)
-        ax.set_title(f'{b}{tag}', fontsize=TITLE_SIZE)
-        add_panel_letter(ax, LETTERS[idx], x=-0.10, y=1.02, size=LETTER_PT)
+        ax.set_title(f'{b}{tag}', fontsize=TITLE_SIZE, loc='left')
+        add_panel_letter(ax, LETTERS[idx], x=-0.20, y=1.02, size=LETTER_PT)
+        ax.margins(y=0.10)
         ax.grid(True, alpha=0.3, lw=0.5)
         ax.tick_params(axis='both', labelsize=TICK_SIZE)
     axl = axes[9]
     axl.axis('off')
-    handles = [Line2D([0], [0], marker='o', linestyle='', markersize=9,
+    handles = [Line2D([0], [0], marker='o', linestyle='', markersize=7,
                       markerfacecolor=MODEL_COLOR[m], markeredgecolor='black',
-                      markeredgewidth=0.5, label=m) for m in present]
-    axl.legend(handles=handles, loc='center', fontsize=LEGEND_SIZE - 1,
-               frameon=True, edgecolor='gray', ncol=1, labelspacing=0.7,
-               title='GP family (warm) / Transfer-learning (cool)',
-               title_fontsize=LEGEND_SIZE - 1)
-    plt.tight_layout(w_pad=2.0, h_pad=2.5)
+                      markeredgewidth=0.5, label=short(m)) for m in present]
+    axl.legend(handles=handles, loc='center', fontsize=LEGEND_SIZE,
+               frameon=True, edgecolor='gray', ncol=1, labelspacing=0.35,
+               borderpad=0.5)
+    plt.tight_layout(w_pad=1.2, h_pad=1.4)
     save_dual(fig, NEWFIGS / 'A1_calibration_vs_regret')
     plt.close(fig)
 

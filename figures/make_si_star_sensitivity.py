@@ -43,8 +43,8 @@ CRITERIA = [("star_old", "majority rule (uncorrected)"),
             ("star_new", "stratified test, BH-FDR $q\\leq0.05$")]
 
 plt.rcParams.update({
-    "font.size": 9.5, "axes.titlesize": 9.5, "axes.labelsize": 9,
-    "xtick.labelsize": 8, "ytick.labelsize": 8,
+    "font.size": 11, "axes.titlesize": 11, "axes.labelsize": 10.5,
+    "xtick.labelsize": 10, "ytick.labelsize": 10,
     "figure.dpi": 130, "savefig.dpi": 300, "axes.linewidth": 0.8,
 })
 
@@ -57,12 +57,12 @@ def heatmap(fig, ax, adv, star, vmax, small_cb=True):
     for i, t in enumerate(T10):
         for j, rr in enumerate(R2B):
             if star.values[i, j] == True:  # noqa: E712 (empty bins are NaN)
-                ax.text(rr, t, "*", ha="center", va="center", fontsize=11,
+                ax.text(rr, t, "*", ha="center", va="center", fontsize=12,
                         fontweight="bold")
     if small_cb:
         cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.03)
-        cb.set_label("advantage", fontsize=7.5)
-        cb.ax.tick_params(labelsize=7.5)
+        cb.set_label("advantage", fontsize=9.5)
+        cb.ax.tick_params(labelsize=9.5)
 
 
 def pivots(percell, perbin, metric, comp_key):
@@ -76,7 +76,8 @@ def pivots(percell, perbin, metric, comp_key):
 
 
 def make_figure(percell, perbin):
-    fig, axes = plt.subplots(3, 4, figsize=(17.0, 10.8))
+    # 2026-08-18 print-size re-export: 17x10.8 in -> 13.7x8.7 in (~2.0x print width)
+    fig, axes = plt.subplots(3, 4, figsize=(13.7, 8.7))
     letters = "abcdefghijkl"
     vmax = {metric: np.nanmax([np.abs(
         pivots(percell, perbin, metric, f"{a}|{b}")[0].values)
@@ -89,16 +90,16 @@ def make_figure(percell, perbin):
             for crit, clabel in CRITERIA:
                 ax = axes[r][col]
                 heatmap(fig, ax, adv, stars[crit], vmax[metric])
-                ax.set_title(f"{mtitle}\n{clabel}", fontsize=9)
+                ax.set_title(f"{mtitle}\n{clabel}", fontsize=11)
                 if col == 0:
                     ax.set_ylabel(f"{first} vs {second}\n\ntop-10 optimum agreement",
-                                  fontsize=9)
+                                  fontsize=10.5)
                 else:
-                    ax.set_ylabel("top-10 optimum agreement", fontsize=8.5)
+                    ax.set_ylabel("top-10 optimum agreement", fontsize=10.5)
                 if r == 2:
                     ax.set_xlabel("global LF-HF $R^2$")
                 ax.text(-0.14, 1.08, letters[r * 4 + col], transform=ax.transAxes,
-                        fontweight="bold", fontsize=13, fontfamily="sans-serif",
+                        fontweight="bold", fontsize=16, fontfamily="sans-serif",
                         ha="left", va="bottom")
                 col += 1
     fig.tight_layout()

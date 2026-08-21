@@ -34,7 +34,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _common import NEWFIGS, REPO, add_panel_letter, letter_pt, save_dual
+from _common import NEWFIGS, REPO, add_panel_letter, letter_pt, save_dual, short
 
 CELLS = REPO / 'results' / 'traj_cells'
 DATA = REPO / 'data'
@@ -89,8 +89,10 @@ COLORS = {**GP_COLORS, **TL_COLORS}
 LS = {m: ('-' if m in GP else '--') for m in MODELS}
 LW = {m: (2.4 if m in GP else 1.3) for m in MODELS}
 LETTERS = list('abcdefghi')
-# uniform 8 pt print size: tight PDF width 403.7 mm, print width 174 mm
-LETTER_PT = letter_pt(403.7, 174)
+# uniform 8 pt print size: tight PDF width ~356 mm, print width 174 mm
+# (2026-08-18 print-size re-export: 16x12 in -> 14x10.5 in, ~2.0x print width,
+# fonts raised so body text prints at >= 5 pt)
+LETTER_PT = letter_pt(356.0, 174)
 
 
 def topk_overlap(bn, ks=(10, 30)):
@@ -108,7 +110,7 @@ def topk_overlap(bn, ks=(10, 30)):
 
 
 def main():
-    fig, axes = plt.subplots(3, 3, figsize=(16, 12))
+    fig, axes = plt.subplots(3, 3, figsize=(14, 10.5))
     for i, (ax, bn) in enumerate(zip(axes.flat, BENCHES)):
         for ml in MODELS:
             f = CELLS / f'traj_{bn}_{ml}.csv'
@@ -125,23 +127,25 @@ def main():
             mu = np.vstack(curves).mean(0)
             ax.plot(grid, mu, color=COLORS[ml], ls=LS[ml], lw=LW[ml],
                     label=PAPER_NAME[ml], alpha=0.9)
-        ax.set_title(bn, fontsize=11, fontweight='bold')
+        ax.set_title(bn, fontsize=13, fontweight='bold', loc='left')
         add_panel_letter(ax, LETTERS[i], x=-0.10, y=1.01, size=LETTER_PT)
-        ax.set_xlabel('budget (HF-equivalent cost)')
-        ax.set_ylabel('simple regret')
+        ax.set_xlabel('budget (HF-equivalent cost)', fontsize=12)
+        ax.set_ylabel('simple regret', fontsize=12)
         ax.set_yscale('symlog', linthresh=1e-3)
+        ax.tick_params(labelsize=11)
         ax.grid(alpha=0.3)
         o10, o30 = topk_overlap(bn)
         ax.text(0.97, 0.97,
                 f'LF/HF top-k overlap\ntop-10: {o10:.2f}   top-30: {o30:.2f}',
-                transform=ax.transAxes, ha='right', va='top', fontsize=8.5,
+                transform=ax.transAxes, ha='right', va='top', fontsize=10,
                 bbox=dict(boxstyle='round,pad=0.3', fc='white', ec='0.6',
                           alpha=0.85))
     handles = [plt.Line2D([0], [0], color=COLORS[ml], ls=LS[ml], lw=LW[ml])
                for ml in MODELS]
-    labels = [PAPER_NAME[ml] for ml in MODELS]
+    labels = [short(PAPER_NAME[ml]) for ml in MODELS]
     fig.legend(handles, labels, loc='lower center', ncol=5, frameon=False,
-               fontsize=9, title='GP family (solid) | TL family (dashed)')
+               fontsize=10.5, title='GP family (solid) | TL family (dashed)',
+               title_fontsize=10.5)
     fig.tight_layout(rect=[0, 0.08, 1, 0.99])
     save_dual(fig, NEWFIGS / 'regret_trajectory', png_dpi=200)
     plt.close(fig)

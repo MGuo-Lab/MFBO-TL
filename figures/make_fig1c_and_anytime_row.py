@@ -40,7 +40,9 @@ from _common import NEWFIGS, REPO, add_panel_letter, letter_pt
 import grid_stats                       # lives in this directory
 
 # uniform 8 pt print size, computed per output from its tight PDF width:
-LETTER_PT_GRID = letter_pt(409.0, 174)   # fig1c_family_split_grid (SI, 174 mm)
+# 2026-08-18 print-size re-export of the SI grid: 16.2x13.2 in -> 12.3x10 in
+# (~1.8x the 174 mm print width); fonts raised so body text prints >= 5 pt.
+LETTER_PT_GRID = letter_pt(315.0, 174)   # fig1c_family_split_grid (SI, 174 mm)
 LETTER_PT_ROW = letter_pt(302.1, 174)    # fig1_anytime_row (main text, 174 mm)
 
 warnings.filterwarnings('ignore')
@@ -144,7 +146,7 @@ def row_mats(G, perbin, metric):
 
 
 def draw_heatmap(fig, ax, adv, sig, vmax, first, second, mtitle, col0,
-                 cb_fontsize=8.5):
+                 cb_fontsize=10):
     ax.set_facecolor('0.92')
     im = ax.imshow(adv.values, origin='lower', cmap='RdBu_r', vmin=-vmax, vmax=vmax,
                    aspect='auto',
@@ -154,13 +156,14 @@ def draw_heatmap(fig, ax, adv, sig, vmax, first, second, mtitle, col0,
             if sig.values[i, j] == True:  # noqa: E712 (NaN-safe: empty bins skip)
                 ax.text(rr, t, '*', ha='center', va='center', fontsize=13,
                         fontweight='bold')
-    ax.set_xlabel('global LF-HF $R^2$')
+    ax.set_xlabel('global LF-HF $R^2$', fontsize=11)
     if col0:
-        ax.set_ylabel(f'{mtitle}\n\ntop-10 optimum agreement')
+        ax.set_ylabel(f'{mtitle}\n\ntop-10 optimum agreement', fontsize=11)
     else:
-        ax.set_ylabel('top-10 optimum agreement')
+        ax.set_ylabel('top-10 optimum agreement', fontsize=11)
     ax.set_title(f'{first}  vs  {second}\n(red: {first} better, blue: {second} better)',
-                 fontsize=10)
+                 fontsize=11)
+    ax.tick_params(labelsize=10.5)
     cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
     cb.set_label('advantage', fontsize=cb_fontsize)
     cb.ax.tick_params(labelsize=cb_fontsize)
@@ -168,14 +171,14 @@ def draw_heatmap(fig, ax, adv, sig, vmax, first, second, mtitle, col0,
 
 def full_grid(G, perbin):
     """The SI 3x3 grid with NEW letters a-i (row-major)."""
-    fig, axes = plt.subplots(3, 3, figsize=(16.2, 13.2))
+    fig, axes = plt.subplots(3, 3, figsize=(12.3, 10.0))
     letters = list('abcdefghi')
     for r, (metric, mtitle) in enumerate(METRICS):
         mats, sigs, vmax = row_mats(G, perbin, metric)
         for c, ((first, second), adv, sig) in enumerate(zip(COMPARISONS, mats, sigs)):
             ax = axes[r][c]
             draw_heatmap(fig, ax, adv, sig, vmax, first, second, mtitle, col0=(c == 0))
-            add_panel_letter(ax, letters[r * 3 + c], x=-0.16, y=1.06, size=LETTER_PT_GRID)
+            add_panel_letter(ax, letters[r * 3 + c], x=-0.20, y=1.13, size=LETTER_PT_GRID)
     for c, (first, second) in enumerate(COMPARISONS):
         ax = axes[2][c]
         for metric, lab, col, mk in [('final_regret', 'final regret', RED, 'o'),
@@ -185,13 +188,14 @@ def full_grid(G, perbin):
             ax.errorbar(m.index, m['mean'], yerr=m['sem'], marker=mk, color=col, lw=2,
                         capsize=3, label=lab)
         ax.axhline(0, color='k', lw=0.8, ls=':')
-        ax.set_xlabel('top-10 optimum agreement')
-        ax.set_ylabel(f'advantage  (>0: {first} better)')
-        ax.set_title(f'Marginal: {first} vs {second}\n(averaged over $R^2$)', fontsize=10)
-        ax.legend()
+        ax.set_xlabel('top-10 optimum agreement', fontsize=11)
+        ax.set_ylabel(f'advantage  (>0: {first} better)', fontsize=11)
+        ax.set_title(f'Marginal: {first} vs {second}\n(averaged over $R^2$)', fontsize=11)
+        ax.tick_params(labelsize=10.5)
+        ax.legend(fontsize=10)
         despine(ax)
         ax.grid(alpha=0.25)
-        add_panel_letter(ax, letters[6 + c], x=-0.16, y=1.06, size=LETTER_PT_GRID)
+        add_panel_letter(ax, letters[6 + c], x=-0.20, y=1.13, size=LETTER_PT_GRID)
     lo = min(axes[2][c].get_ylim()[0] for c in range(3))
     hi = max(axes[2][c].get_ylim()[1] for c in range(3))
     for c in range(3):

@@ -204,36 +204,37 @@ improving sample efficiency in autonomous discovery under constrained experiment
 \includegraphics[width=\textwidth]{paper_figures/fig1_anytime_row.pdf}
 \caption{Overview of the surrogate comparison and headline results.
 \textbf{a,} in a self-driving laboratory, a shared candidate pool
-$\mathcal{X}_{\mathrm{cand}}$ is queried through an abundant, cheap low-fidelity (LF)
-simulation (cost $\rho \ll 1$) and a scarce, expensive high-fidelity (HF) experiment
-(cost $1$). With the same selection rule (acquisition policy), the same mix of cheap and expensive
-evaluations, and all transfer-learning (TL) surrogates the same size, only the surrogate is
-varied: a four-member Gaussian-process family (the baseline MFGP, NARGP, a deep-kernel
-GP, and a sparse variational MFGP) against eleven TL surrogates, in which a network trained on
-the cheap LF data, $g^{(L)}$, is corrected by a second network, $g^{(H)}$, trained on
-the accurate HF data.
+$\mathcal{X}_{\mathrm{cand}}$ is queried through a cheap low-fidelity (LF)
+source (cost $\rho \ll 1$) and a scarce, expensive high-fidelity (HF) experiment
+(cost $1$). With the selection rule (acquisition policy), evaluation mix, and model
+size held fixed, only the surrogate is
+varied: a four-member Gaussian-process family (baseline MFGP, NARGP, deep-kernel
+GP, sparse variational MFGP) against eleven transfer-learning (TL) surrogates, in
+which a network trained on
+LF data, $g^{(L)}$, is corrected by a second network, $g^{(H)}$, trained on
+HF data.
 \textbf{b--k,} final regret at the designated budget (mean $\pm$ s.e.\ over 20
 seeds), surrogates sorted within each panel (lower is better); Gaussian-process family
 in salmon, TL surrogates in blue. The Gaussian-process family attains the lowest regret
 on the smooth, low-dimensional Branin functions (\textbf{b},\textbf{c}) but the highest
 on the molecular-descriptor benchmarks (\textbf{f}--\textbf{i}); on the
 low-discrimination Matbench-gap task (\textbf{j}) the baseline MFGP is competitive.
-Panel \textbf{k} reports the average rank of all fifteen surrogates across the nine
-benchmarks; the dashed line marks the best average rank plus the Nemenyi critical
-difference ($\alpha = 0.05$)~\citep{demsar2006statistical}, which no surrogate pair
-exceeds, so the ordering is descriptive (omnibus rank analysis in Supplementary
+Panel \textbf{k} shows the average rank of all fifteen surrogates; the dashed line
+marks the best rank plus the Nemenyi critical
+difference ($\alpha = 0.05$)~\citep{demsar2006statistical}, which no pair
+exceeds, so the ordering is descriptive (Supplementary
 Note~\ref{suppnote:rank_stats}).
 \textbf{l--n,} family-split anytime-advantage maps from the controlled
 fidelity-quality grid (Methods). Mean anytime advantage (area under the regret--budget
 curve) in bins of the global LF--HF $R^2$ (horizontal) and the top-10 optimum agreement
-between fidelities (vertical), comparing TL against the baseline MFGP (\textbf{l}), TL
-against the MFGP variants (\textbf{m}), and the MFGP variants against the baseline MFGP
+(vertical), comparing TL against the baseline MFGP (\textbf{l}), TL
+against the MFGP variants (\textbf{m}), and MFGP variants against baseline
 (\textbf{n}); red favours the first-named family and asterisks mark bins significant
 under a per-bin stratified signed-rank test with Benjamini--Hochberg
 false-discovery-rate correction across each map (Methods). The TL
 advantage over the baseline is positive in every cell, grows as the top-10 agreement
-falls, and is nearly flat in $R^2$; the complete grid, with the final-regret maps and
-marginal profiles, is Supplementary Fig.~\ref{suppfig:family_split}.}
+falls, and is nearly flat in $R^2$; the complete grid is Supplementary
+Fig.~\ref{suppfig:family_split}.}
 \label{fig:overview}\label{fig:final_regret}\label{fig:family_heatmap}
 \end{figure*}
 
@@ -410,7 +411,7 @@ policies under the default protocol, we matched the acquisition policy across bo
 the observed advantage of transfer-learning surrogates could be explained by this asymmetry. In the default setting, the baseline MFGP used an uncertainty-driven expected-improvement (EI) acquisition whereas the transfer-learning surrogates used a greedy policy (Methods). We therefore compared matched acquisition settings by running the baseline MFGP under a greedy policy
 and the transfer-learning surrogate under an uncertainty-driven policy using its own Bayesian linear-regression (BLR) predictive
 standard deviation (Fig.~\ref{fig:acquisition}). Using the greedy policy for the baseline MFGP had little effect on performance. Final regret changed only marginally, for example $6.55 \rightarrow 6.71$ on COFs and $0.17 \rightarrow
-0.15$ on polarizability.  Thus matching the acquisition policy did not improve the baseline MFGP, indicating that its limitation arises primarily from the surrogate rather than the acquisition policy. Under this matched greedy policy the transfer-learning surrogates retained
+0.14$ on polarizability.  Thus matching the acquisition policy did not improve the baseline MFGP, indicating that its limitation arises primarily from the surrogate rather than the acquisition policy. Under this matched greedy policy the transfer-learning surrogates retained
 a large advantage on COFs, achieving approximately an $8\times$ lower regret than the baseline MFGP for the median transfer-learning surrogate and a $16\times$ lower regret for the
 best. Smaller but consistent advantages were also observed on the remaining molecular benchmarks. The transfer-learning
 surrogate showed the opposite behaviour: its performance was strongly sensitive to its acquisition policy. On COFs the median regret across the eleven transfer-learning surrogates

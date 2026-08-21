@@ -28,7 +28,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import NEWFIGS, REPO, RESULTS, add_panel_letter, letter_pt, save_dual
 
 # uniform 8 pt print size: tight PDF width 378.2 mm, print width 160 mm
-LETTER_PT = letter_pt(378.2, 160)
+# 2026-08-18 print-size re-export: 15x6 in -> 12.6x5.2 in (~2.0x print width)
+LETTER_PT = letter_pt(320.0, 160)
 
 sys.path.insert(0, str(REPO / 'src'))
 from synthetic_functions import branin_hf, branin_lf, park_hf, park_lf  # noqa: E402
@@ -83,7 +84,7 @@ def main():
     metrics = metrics.set_index('benchmark').loc[BENCHMARKS9].reset_index()
     ys = load_benchmark_y()
 
-    fig, axes = plt.subplots(1, 2, figsize=(15, 6),
+    fig, axes = plt.subplots(1, 2, figsize=(12.6, 5.2),
                              gridspec_kw={'width_ratios': [1.15, 1]})
     ax_curve, ax_bar = axes
 
@@ -144,9 +145,9 @@ def main():
         ax_bar.text(val + 0.02 * abs(sr.values).max() + 1e-6, i, marker,
                     va='center', fontsize=LEGEND_SIZE - 1, color='#333')
     handles = [Patch(facecolor=HIGHLIGHT_COLOR,
-                     label='Regime A: LF screening sufficient (regret ≤ 0.3)'),
+                     label='Regime A (regret ≤ 0.3)'),
                Patch(facecolor=MFGP_COLOR,
-                     label='Regime B: surrogate-critical (regret > 0.3)')]
+                     label='Regime B (regret > 0.3)')]
     ax_bar.legend(handles=handles, fontsize=LEGEND_SIZE - 1,
                   loc='lower right', frameon=True, edgecolor='gray')
 
