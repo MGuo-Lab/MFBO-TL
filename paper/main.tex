@@ -1,5 +1,10 @@
-%%%%%%%%  npj Computational Materials  —  Springer Nature template (sn-jnl)  %%%%%%%%
-%% Display-item budget (npj Comp. Mater.): up to 6 items (figures and/or tables).
+%%%%%%%%  Preprint  --  plain LaTeX article class, no journal template  %%%%%%%%
+%% Typeset as a preprint: the manuscript has not been accepted anywhere, so it
+%% deliberately carries no publisher's class file. If it is submitted to a
+%% journal later, drop the target template back in at that point; the previous
+%% Springer Nature (sn-jnl) setup is preserved in git history.
+%% Display-item budget kept at 6 items (figures and/or tables) as a self-imposed
+%% limit inherited from the earlier target journal.
 %% Current count = 6:
 %%   Fig 1  overview + final regret (a--j) + family-split heatmap (anytime-AUC row)
 %%   Fig 2  regret trajectories
@@ -89,7 +94,7 @@
 %%        synthetic-bias caveat added in sec:meth-grid; Discussion grid-scope
 %%        clause extended to match.
 
-\documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Nature Portfolio (npj Computational Materials), two-column journal layout
+\documentclass[11pt,a4paper]{article}% plain preprint layout (no journal template)
 
 %% ===== AUTHOR TODO (preserved as comments so they don't break the build) =====
 %% decouple GP familys to GP and TL based GP --> Done
@@ -110,73 +115,66 @@
 
 %============================================================================
 
-%%%% Standard packages. Note: the sn-jnl class assumes xcolor / textcomp /
-%%%% manyfoot are loaded (it uses them in its \begin{document} hook), so they
-%%%% are kept here even though the original ICML preamble did not list them.
+%%%% Standard packages.
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+%% Scalable Type1 text+math font (Times). Needed so that microtype's font
+%% expansion works and the PDF carries no Type3 bitmap fonts.
+\usepackage{mathptmx}%
 \usepackage{graphicx}%
 \usepackage{amsmath,amssymb,amsfonts}%
 \usepackage{mathtools}%
 \usepackage{xcolor}%
 \usepackage{textcomp}%
-\usepackage{manyfoot}%
 \usepackage{booktabs}%
 \usepackage{microtype}%
 \usepackage[title]{appendix}%
+\usepackage{geometry}%
+\usepackage{authblk}%
+\usepackage[numbers,sort&compress]{natbib}%
+\usepackage[font=small,labelfont=bf]{caption}%
+\usepackage{url}%
+\usepackage[hidelinks]{hyperref}%
 
-%% Tighten Springer Nature's default page margins (the class leaves a very
-%% large bottom margin and ~24mm sides). This widens the two-column text block
-%% and reduces whitespace while keeping the two-column journal layout.
-\geometry{a4paper, top=16mm, bottom=18mm, left=18mm, right=18mm,
-          marginparwidth=0mm, marginparsep=0mm, bindingoffset=0mm, columnsep=8mm}
+%% Single-column preprint page geometry.
+\geometry{a4paper, top=25mm, bottom=25mm, left=25mm, right=25mm}
 
 \raggedbottom
 
-%% Corresponding-author asterisk. sn-jnl.cls emits it inside
-%%   \authorsep{#2}\unskip\ifx\@authfrstarg\empty\else ... {*} ... \fi
-%% in \@@corrauthor, where \@authfrstarg is the OPTIONAL affiliation argument.
-%% All four authors share one affiliation, so no affiliation superscripts are
-%% wanted and \author* is written without brackets -- which skips that branch
-%% entirely and leaves the "*Corresponding author(s)" footnote with no asterisk
-%% anchored to any name. Redefine the macro to print the asterisk
-%% unconditionally, and no affiliation number. (Delete this patch and restore
-%% \author*[n] / \affil[n] if a second affiliation is ever added.)
-\makeatletter
-\renewcommand{\@@corrauthor}[2][]{\def\@authfrstarg{#1}\@corauemailtrue%
-  \advance\corraucount by 1%
-  \g@addto@macro\artauthors{%
-    \global\@auemailtrue%
-    \Authorfont%
-    \def\baselinestretch{1}%
-    \authorsep{#2}\unskip\textsuperscript{*}\unskip%
-    \def\authorsep{\au@and~}%
-    \global\let\sep\@empty\global\let\@corref\@empty%
-  }}%
-\makeatother
+%% Author-block spacing.
+\renewcommand\Authfont{\normalsize}
+\renewcommand\Affilfont{\small\itshape}
+\setlength{\affilsep}{0.8em}
+
+%% Keywords line (rendered under the abstract).
+\newcommand{\keywords}[1]{\par\medskip\noindent\textbf{Keywords:} #1}
 
 \begin{document}
 
-\title[Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
-Optimization]{Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
+\title{Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
 Optimization}
 
-\author{\fnm{Jaewook} \sur{Lee}}
+\author[1]{Jaewook Lee}
+\author[1]{Ethan Errington}
+\author[1]{Christian D. Lorenz}
+\author[1,$*$]{Miao Guo}
 
-\author{\fnm{Ethan} \sur{Errington}}
+\affil[1]{Department of Engineering, King's College London, London WC2R 2LS,
+United Kingdom}
+\affil[$*$]{Corresponding author: \texttt{miao.guo@kcl.ac.uk}}
 
-\author{\fnm{Christian D.} \sur{Lorenz}}
+\date{}
 
-\author*{\fnm{Miao} \sur{Guo}}\email{miao.guo@kcl.ac.uk}
+\maketitle
 
-\affil{\orgdiv{Department of Engineering}, \orgname{King's College London},
-\orgaddress{\city{London}, \postcode{WC2R 2LS}, \country{United Kingdom}}}
 %% [2026-08-18] 150-word abstract for the NCS submission (limit 150; the
 %% preprint's 206-word version is preserved in git history for comparison).
-\abstract{\unboldmath Self-driving laboratories rely on multi-fidelity Bayesian optimization (MFBO) to balance cheap, approximate evaluations against scarce, expensive ones through a predictive surrogate. Gaussian processes (GPs) remain the default but scale poorly and assume a smoothness that molecular and materials search spaces violate. Transfer learning learns representations from abundant cheap data and adapts them to sparse expensive data, yet remains untested as the engine of closed-loop optimization. Here we benchmark eleven transfer-learning surrogates against four GP methods under identical selection rule, budget, and model size across nine synthetic, chemistry, and materials tasks. GPs win on smooth, low-dimensional functions but perform worst on molecular and materials problems, where transfer-learning surrogates reach better solutions with less computation, an advantage the fixed selection rule attributes to the surrogate. Uncertainty-driven exploration is not reliably beneficial and calibration does not predict performance, making greedy exploitation of the transfer-learned mean the robust default for molecular and materials MFBO.}
+\begin{abstract}
+Self-driving laboratories rely on multi-fidelity Bayesian optimization (MFBO) to balance cheap, approximate evaluations against scarce, expensive ones through a predictive surrogate. Gaussian processes (GPs) remain the default but scale poorly and assume a smoothness that molecular and materials search spaces violate. Transfer learning learns representations from abundant cheap data and adapts them to sparse expensive data, yet remains untested as the engine of closed-loop optimization. Here we benchmark eleven transfer-learning surrogates against four GP methods under identical selection rule, budget, and model size across nine synthetic, chemistry, and materials tasks. GPs win on smooth, low-dimensional functions but perform worst on molecular and materials problems, where transfer-learning surrogates reach better solutions with less computation, an advantage the fixed selection rule attributes to the surrogate. Uncertainty-driven exploration is not reliably beneficial and calibration does not predict performance, making greedy exploitation of the transfer-learned mean the robust default for molecular and materials MFBO.
+\end{abstract}
 
 \keywords{Multi-fidelity Bayesian optimization, Transfer learning,
 Materials and molecular discovery}
-
-\maketitle
 
 \section{Introduction}
 
@@ -190,7 +188,7 @@ design space while reserving scarce HF measurements for validation of the most p
 candidates~\citep{kennedy2000predicting}. MFBO has therefore emerged as an increasingly powerful strategy for
 improving sample efficiency in autonomous discovery under constrained experimental budgets~\citep{sabanza2025best}.
 
-\begin{figure*}[tp]
+\begin{figure}[tp]
 \centering
 %% Display item 1 of 6 — composite: (a) closed-loop overview; (b--k) final
 %% regret on the nine benchmarks; (l--n) family-split anytime-AUC advantage row
@@ -237,7 +235,7 @@ advantage over the baseline is positive in every cell, grows as the top-10 agree
 falls, and is nearly flat in $R^2$; the complete grid is Supplementary
 Fig.~\ref{suppfig:family_split}.}
 \label{fig:overview}\label{fig:final_regret}\label{fig:family_heatmap}
-\end{figure*}
+\end{figure}
 
 Most MFBO methods remain rooted in Gaussian process (GP) surrogates whose strength lies in calibrated uncertainty estimation. Standard multi-fidelity Gaussian processes (MFGP) perform strongly in low-data regimes and provide uncertainty estimates, but their limitations become increasingly apparent
  in the high-dimensional and heterogeneous search spaces characteristic of molecular and materials discovery.  GP surrogates scale poorly as LF data accumulate~\citep{williams2006gaussian}, while kernel-based similarity assumptions can struggle to capture nonlinear, biased or location-dependent relationships between LF and HF signals~\citep{snoek2015scalable, seeger2004gaussian, perdikaris2017nonlinear}. This limitation is particularly important in SDLs, where LF sources are often imperfect experimental proxies: they may be strongly informative only in restricted regions of the design space, misleading near the optimum or weakly correlated with the final HF objective.
@@ -354,7 +352,7 @@ the optimum. Surrogate choice was therefore most consequential on the hard,
 sharply-peaked molecular-descriptor benchmarks and less important on dense, small-budget tasks,
 consistent with the difficulty analysis below.
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{paper_figures/regret_trajectory.pdf}
 \caption{Regret trajectories as a function of cumulative budget (mean $\pm$ s.e.\ over 20
@@ -365,7 +363,7 @@ polarizability (\textbf{e}--\textbf{g}) the Gaussian-process family remains in a
 high-regret regime while transfer-learning surrogates continue to improve as the
 budget grows. Insets report the low-/high-fidelity (LF/HF) top-$k$ overlap of each benchmark.}
 \label{fig:regret_trajectory}
-\end{figure*}
+\end{figure}
 
 \subsection{Optimum agreement, not global correlation, governs the transfer-learning
 advantage}\label{sec:res-grid}
@@ -422,7 +420,7 @@ These results suggest that the baseline MFGP
 posterior \emph{mean} misranks the promising regions in these descriptor spaces, so changing the acquisition policy has limited effect. By contrast, the transfer-learning surrogate appeared to provide a more useful ranking of HF candidates, making performance more dependent on how scarce HF
 evaluations were allocated between exploitation and exploration. We therefore examined this sensitivity using a broader acquisition-function portfolio.
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.92\textwidth]{paper_figures/A6_acquisition_matrix.pdf}
 \caption{Surrogate $\times$ acquisition comparison. Regret (mean $\pm$ s.e.) at the budget
@@ -435,7 +433,7 @@ showing that the acquisition policy does not explain the baseline MFGP's poor pe
 whereas the transfer-learning surrogate degrades sharply when uncertainty-driven exploration replaces
 greedy exploitation of the transfer-learned mean.}
 \label{fig:acquisition}
-\end{figure*}
+\end{figure}
 
 \subsection{Uncertainty-driven exploration has benchmark-dependent value}\label{sec:res-uq}
 
@@ -467,7 +465,7 @@ The greedy policy therefore remained the most robust single default,
 whereas uncertainty-driven exploration showed benchmark-dependent benefits, motivating evaluation across an acquisition-function
 portfolio rather than reliance on a single acquisition.
 
-\begin{figure*}[tp]
+\begin{figure}[tp]
 \centering
 %% Display item 4 of 6 — composite: (a--d) acquisition portfolio;
 %% (e--m) calibration versus regret. Both blocks belong to this section's
@@ -500,7 +498,7 @@ full budget (Park-Fav additionally exhausts its $256$-point candidate pool), so 
 are evaluated at the early decision budget $B=10$, consistent with the regret figures
 (Figs.~\ref{fig:final_regret} and~\ref{fig:regret_trajectory}).}
 \label{fig:portfolio}\label{fig:calibration}
-\end{figure*}
+\end{figure}
 
 Calibration quality was a poor predictor of optimization performance: across all fifteen surrogates, the correlation between expected calibration error and final regret was negative on every benchmark, ranging from $-0.88$ on COFs to $-0.08$ on HOPV15 (Fig.~\ref{fig:calibration}e--m). If anything, the best-calibrated surrogates, including the entire GP family, were the weakest optimizers on the molecular-descriptor benchmarks, showing that better-calibrated uncertainty did not translate into better optimization. This is consistent with uncertainty acting as a secondary, benchmark-dependent factor rather than a primary driver of performance.
 The bounded $\tanh$ activation used throughout was likewise justified by
@@ -531,7 +529,7 @@ was nearly uninformative and $0.91$ on Matbench-gap. These results indicate that
 even though the choice among surrogates had limited impact on the
 low-discrimination Matbench-gap task.
 
-\begin{figure*}[tp]
+\begin{figure}[tp]
 \centering
 %% Display item 5 of 6 — composite: (a,b) top-k overlap and LF-only screening
 %% regret; (c) compute scaling law. Together: when a learned surrogate is
@@ -561,7 +559,7 @@ $N = 300$. Absolute per-benchmark FLOPs and the average compute ranking are in
 Supplementary Fig.~\ref{suppfig:computing_time} (Supplementary
 Note~\ref{suppnote:computational_cost}).}
 \label{fig:topk}\label{fig:scaling_law}
-\end{figure*}
+\end{figure}
 
 \subsection{Computational cost}\label{sec:res-cost}
 
@@ -943,9 +941,8 @@ ablation studies (including activation, uncertainty placement, acquisition varia
 adaptive scheduling) are provided in the Supplementary Information.
 
 
-\backmatter
 
-\bmhead{Author contributions}
+\section*{Author contributions}
 
 J.L.: Conceptualization, Methodology, Validation, Visualization,
 Writing -- original draft, Writing -- review \& editing.
@@ -953,12 +950,12 @@ E.E.: Conceptualization.
 C.D.L.: Writing -- review \& editing.
 M.G.: Conceptualization, Methodology, Writing -- review \& editing.
 
-\bmhead{Funding}
+\section*{Funding}
 
 J.L.\ and M.G.\ would like to acknowledge financial support from the King's
 College London Net Zero Centre Ph.D.\ Scholarship scheme.
 
-\bmhead{Data availability}
+\section*{Data availability}
 
 %% Repository transfer to MGuo-Lab/MFBO-TL in progress (2026-08-21); add the
 %% Zenodo DOI here if one is minted before submission.
@@ -973,17 +970,18 @@ library~\citep{ghahremanpour2018alexandria}, HOPV15 from the Harvard Organic
 Photovoltaic dataset~\citep{lopez2016harvard}, and Matbench-gap from the Matbench
 experimental band-gap suite~\citep{dunn2020benchmarking}.
 
-\bmhead{Code availability}
+\section*{Code availability}
 
 %% MGuo-Lab/MFBO-TL created 2026-08-21; repository transfer in progress --
 %% confirm the content is public before submission.
 The code supporting this study is available at
 \url{https://github.com/MGuo-Lab/MFBO-TL}.
 
-\bmhead{Competing interests}
+\section*{Competing interests}
 
 The authors declare no competing interests.
 
+\bibliographystyle{unsrtnat}
 \bibliography{references}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -993,7 +991,7 @@ The authors declare no competing interests.
 %% appendix containing full reproducibility detail and the ablation studies
 %% referenced from the main text.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\onecolumn
+\clearpage
 
 % ---------------------------------------------------------------------------
 % Supplementary Information
@@ -1257,7 +1255,7 @@ summed over the loop) are shown per surrogate and benchmark, confirming that the
 $\mathcal{O}(N^3)$ Gaussian processes dominate the budget while the $\mathcal{O}(N)$
 transfer-learning surrogates stay one to two orders of magnitude cheaper.
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{paper_figures/computing_time.pdf}
 \caption{Absolute computational cost across the nine benchmarks, in floating-point
@@ -1272,7 +1270,7 @@ so the gap widens with the evaluation budget. Panel \textbf{j} summarizes these 
 the average compute rank across all nine benchmarks (lower is cheaper), with the colour
 split repeated in a shared legend below the panels.}
 \label{suppfig:computing_time}
-\end{figure*}
+\end{figure}
 
 
 \suppnote{Family-split advantage maps: complete grid and robustness}{suppnote:family_split}
@@ -1324,7 +1322,7 @@ claim; the final-regret maps are read from their direction and effect sizes.
 %%         best-of-family in each cell (per-cell and per-bin CSVs:
 %%         experiments/regime_review_20260625/grid_fdr_percell.csv / _perbin.csv).
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.9\textwidth]{paper_figures/fig1c_family_split_grid.pdf}
 \caption{Family-split advantage maps: the complete grid. Columns compare transfer
@@ -1339,9 +1337,9 @@ agreement between fidelities (vertical); red favours the first-named family and
 asterisks mark bins significant under the per-bin stratified signed-rank test with
 Benjamini--Hochberg false-discovery-rate correction across each map (Methods).}
 \label{suppfig:family_split}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{paper_figures/si_star_sensitivity.pdf}
 \caption{Sensitivity of the family-split maps to the bin-starring criterion. Each row
@@ -1357,7 +1355,7 @@ Colours (binned mean advantage, red favouring the first-named family) are identi
 within each pair; only the asterisks change. Summary counts are given in
 Supplementary Table~\ref{supptab:star_sensitivity}.}
 \label{suppfig:star_sensitivity}
-\end{figure*}
+\end{figure}
 
 \begin{table}[h]
 \centering

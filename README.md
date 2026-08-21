@@ -4,7 +4,9 @@ Publication repository for the manuscript
 
 > **Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
 > Optimization**
-> (Springer Nature `sn-jnl` class)
+
+This is a preprint. The manuscript is typeset with the standard LaTeX `article`
+class, deliberately without any journal template.
 
 It contains the manuscript, the canonical result files behind every figure and
 quoted statistic, the scripts that regenerate all of them, and the frozen
@@ -16,7 +18,7 @@ was copied, renamed, and left behind.
 
 | Path | Contents |
 |---|---|
-| `paper/` | `main.tex`, `references.bib`, `main.bbl`, `sn-jnl.cls`, `sn-nature.bst` and the 12 canonical figures in `paper/paper_figures/` (the arXiv submission package plus the backmatter statements merged upstream in PR #1, `e1628a8`) |
+| `paper/` | `main.tex`, `references.bib`, `main.bbl` and the 12 canonical figures in `paper/paper_figures/` (the arXiv submission package plus the backmatter statements merged upstream in PR #1, `e1628a8`) |
 | `src/` | Frozen pipeline: `benchmark.py` (BO loop, 12 TL/DNN surrogates, benchmark loaders), `baselines.py` (NARGP, deep-kernel GP, sparse variational MFGP), `synthetic_functions.py` (Branin/Park LF–HF pairs) |
 | `benchmarks/` | Dataset build scripts (`python -m benchmarks.hopv15`, `python -m benchmarks.matbench_gap`) — regenerate `data/*.csv` from public sources; `_common.py` does featurize → standardize → PCA(10) |
 | `data/` | The nine candidate-pool CSVs used by every run (already built; 1.3 MB) |
