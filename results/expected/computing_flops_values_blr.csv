@@ -1,0 +1,73 @@
+benchmark,model,flops,disp
+Branin-Fav,DKL Multi-Fidelity,3363858786400.0,DKL Multi-Fidelity
+Branin-Fav,DNGO-Gradient,351635716740.5,End-to-End Joint
+Branin-Fav,DNGO-Joint,334178596740.5,Frozen-representation transfer
+Branin-Fav,Domain Adaptation (MMD),318517140228.5,Domain Adaptation (MMD)
+Branin-Fav,MFGP,941196099870.0,MFGP
+Branin-Fav,Soft Parameter Sharing,241372241540.5,Soft Parameter Sharing
+Branin-Fav,Sparse MFGP,4655422499676.0,Sparse MFGP
+Branin-Fav,Two-Stage Joint,224309415428.5,Pretrain-then-Joint
+Branin-Unfav,DKL Multi-Fidelity,119537673080.0,DKL Multi-Fidelity
+Branin-Unfav,DNGO-Gradient,34988916647.5,End-to-End Joint
+Branin-Unfav,DNGO-Joint,30237780647.499992,Frozen-representation transfer
+Branin-Unfav,Domain Adaptation (MMD),26213075495.5,Domain Adaptation (MMD)
+Branin-Unfav,MFGP,40638245066.0,MFGP
+Branin-Unfav,Soft Parameter Sharing,25196135847.5,Soft Parameter Sharing
+Branin-Unfav,Sparse MFGP,125375083308.0,Sparse MFGP
+Branin-Unfav,Two-Stage Joint,20485261095.5,Pretrain-then-Joint
+Park-Fav,DKL Multi-Fidelity,2437529617664.0,DKL Multi-Fidelity
+Park-Fav,DNGO-Gradient,336634872959.0,End-to-End Joint
+Park-Fav,DNGO-Joint,318844652159.0,Frozen-representation transfer
+Park-Fav,Domain Adaptation (MMD),303024591487.0,Domain Adaptation (MMD)
+Park-Fav,MFGP,490112010280.0,MFGP
+Park-Fav,Soft Parameter Sharing,226364152959.0,Soft Parameter Sharing
+Park-Fav,Sparse MFGP,4485451085648.0,Sparse MFGP
+Park-Fav,Two-Stage Joint,209054940287.0,Pretrain-then-Joint
+Park-Unfav,DKL Multi-Fidelity,64854681360.0,DKL Multi-Fidelity
+Park-Unfav,DNGO-Gradient,31572045431.5,End-to-End Joint
+Park-Unfav,DNGO-Joint,26680135031.5,Frozen-representation transfer
+Park-Unfav,Domain Adaptation (MMD),22562089335.5,Domain Adaptation (MMD)
+Park-Unfav,MFGP,6191910848.0,MFGP
+Park-Unfav,Soft Parameter Sharing,21560141431.5,Soft Parameter Sharing
+Park-Unfav,Sparse MFGP,122332354960.0,Sparse MFGP
+Park-Unfav,Two-Stage Joint,16732463735.5,Pretrain-then-Joint
+COFs,DKL Multi-Fidelity,1796630886896.0,DKL Multi-Fidelity
+COFs,DNGO-Gradient,279550618026.50006,End-to-End Joint
+COFs,DNGO-Joint,268502534826.49997,Frozen-representation transfer
+COFs,Domain Adaptation (MMD),258765784618.5,Domain Adaptation (MMD)
+COFs,MFGP,636255349853.0,MFGP
+COFs,Soft Parameter Sharing,188830810026.5,Soft Parameter Sharing
+COFs,Sparse MFGP,3843163158374.0,Sparse MFGP
+COFs,Two-Stage Joint,178386795818.5,Pretrain-then-Joint
+FreeSolv,DKL Multi-Fidelity,2868448292448.0,DKL Multi-Fidelity
+FreeSolv,DNGO-Gradient,367166062524.5,End-to-End Joint
+FreeSolv,DNGO-Joint,347639950524.5,Frozen-representation transfer
+FreeSolv,Domain Adaptation (MMD),330636509756.5,Domain Adaptation (MMD)
+FreeSolv,MFGP,1291223464199.9998,MFGP
+FreeSolv,Soft Parameter Sharing,247709678524.5,Soft Parameter Sharing
+FreeSolv,Sparse MFGP,5045451218036.0,Sparse MFGP
+FreeSolv,Two-Stage Joint,228960036156.5,Pretrain-then-Joint
+Polarizability,DKL Multi-Fidelity,145925468700.0,DKL Multi-Fidelity
+Polarizability,DNGO-Gradient,51662647705.5,End-to-End Joint
+Polarizability,DNGO-Joint,47055818905.5,Frozen-representation transfer
+Polarizability,Domain Adaptation (MMD),43174158361.5,Domain Adaptation (MMD)
+Polarizability,MFGP,25686821154.0,MFGP
+Polarizability,Soft Parameter Sharing,35845418905.5,Soft Parameter Sharing
+Polarizability,Sparse MFGP,370227844260.0,Sparse MFGP
+Polarizability,Two-Stage Joint,31379220761.5,Pretrain-then-Joint
+HOPV15,DKL Multi-Fidelity,507659900912.0,DKL Multi-Fidelity
+HOPV15,DNGO-Gradient,124479757812.5,End-to-End Joint
+HOPV15,DNGO-Joint,117431802612.5,Frozen-representation transfer
+HOPV15,Domain Adaptation (MMD),111322894964.50002,Domain Adaptation (MMD)
+HOPV15,MFGP,35988680945.0,MFGP
+HOPV15,Soft Parameter Sharing,84072154612.5,Soft Parameter Sharing
+HOPV15,Sparse MFGP,1492346074236.0,Sparse MFGP
+HOPV15,Two-Stage Joint,77295138164.5,Pretrain-then-Joint
+Matbench-Gap,DKL Multi-Fidelity,1637716339608.0,DKL Multi-Fidelity
+Matbench-Gap,DNGO-Gradient,209064117930.0,End-to-End Joint
+Matbench-Gap,DNGO-Joint,202929410730.0,Frozen-representation transfer
+Matbench-Gap,Domain Adaptation (MMD),197321185961.99997,Domain Adaptation (MMD)
+Matbench-Gap,MFGP,584133839829.0,MFGP
+Matbench-Gap,Soft Parameter Sharing,146219522730.0,Soft Parameter Sharing
+Matbench-Gap,Sparse MFGP,2718979269359.0,Sparse MFGP
+Matbench-Gap,Two-Stage Joint,140415893162.0,Pretrain-then-Joint

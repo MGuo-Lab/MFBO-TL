@@ -1,0 +1,105 @@
+pool,model,n_min,n_max,mean_end
+Branin-Fav,MFGP,40,40,0.02038410708145208
+Branin-Fav,Sparse MFGP,36,36,0.20237697747854425
+Branin-Fav,DKL,40,40,0.008992648270898216
+Branin-Fav,Frozen-representation transfer,40,40,0.12823982097104594
+Branin-Fav,Pretrain-then-Joint,40,40,0.7942570692943004
+Branin-Fav,End-to-End Joint,40,40,0.09972871549384393
+Branin-Fav,Soft Parameter Sharing,40,40,0.3704487042857994
+Branin-Fav,Domain Adaptation (MMD),40,40,0.4545968029395113
+Branin-Unfav,MFGP,40,40,0.05132964811285734
+Branin-Unfav,Sparse MFGP,39,39,1.381618519713118
+Branin-Unfav,DKL,40,40,0.05948188046589882
+Branin-Unfav,Frozen-representation transfer,40,40,1.1600569895172026
+Branin-Unfav,Pretrain-then-Joint,40,40,3.7572834227039613
+Branin-Unfav,End-to-End Joint,40,40,1.225391953909496
+Branin-Unfav,Soft Parameter Sharing,40,40,2.9940112644691217
+Branin-Unfav,Domain Adaptation (MMD),40,40,2.8095079335479825
+Park-Fav,MFGP,40,40,0.0
+Park-Fav,Sparse MFGP,40,40,0.0
+Park-Fav,DKL,40,40,0.0
+Park-Fav,Frozen-representation transfer,40,40,0.0
+Park-Fav,Pretrain-then-Joint,40,40,0.0
+Park-Fav,End-to-End Joint,40,40,0.0
+Park-Fav,Soft Parameter Sharing,40,40,0.0
+Park-Fav,Domain Adaptation (MMD),40,40,0.0
+Park-Unfav,MFGP,40,40,0.0
+Park-Unfav,Sparse MFGP,40,40,0.0
+Park-Unfav,DKL,40,40,0.0
+Park-Unfav,Frozen-representation transfer,40,40,0.0
+Park-Unfav,Pretrain-then-Joint,40,40,0.0
+Park-Unfav,End-to-End Joint,40,40,0.0
+Park-Unfav,Soft Parameter Sharing,40,40,0.0
+Park-Unfav,Domain Adaptation (MMD),40,40,0.0
+COFs,MFGP,40,40,0.0
+COFs,Sparse MFGP,40,40,0.0
+COFs,DKL,40,40,0.0
+COFs,Frozen-representation transfer,40,40,0.0
+COFs,Pretrain-then-Joint,40,40,0.0
+COFs,End-to-End Joint,40,40,0.0
+COFs,Soft Parameter Sharing,40,40,0.0
+COFs,Domain Adaptation (MMD),40,40,0.0
+FreeSolv,MFGP,40,40,0.02025
+FreeSolv,Sparse MFGP,40,40,0.03375
+FreeSolv,DKL,40,40,0.0
+FreeSolv,Frozen-representation transfer,40,40,0.0
+FreeSolv,Pretrain-then-Joint,40,40,0.006750000000000001
+FreeSolv,End-to-End Joint,40,40,0.0
+FreeSolv,Soft Parameter Sharing,40,40,0.0
+FreeSolv,Domain Adaptation (MMD),40,40,0.0
+Polarizability,MFGP,40,40,0.0022298593350383576
+Polarizability,Sparse MFGP,40,40,0.004459718670076715
+Polarizability,DKL,40,40,0.0
+Polarizability,Frozen-representation transfer,40,40,0.0
+Polarizability,Pretrain-then-Joint,40,40,0.0
+Polarizability,End-to-End Joint,40,40,0.0
+Polarizability,Soft Parameter Sharing,40,40,0.0
+Polarizability,Domain Adaptation (MMD),40,40,0.0
+HOPV15,MFGP,40,40,2.3125
+HOPV15,Sparse MFGP,40,40,3.3199999999999994
+HOPV15,DKL,40,40,2.6132499999999994
+HOPV15,Frozen-representation transfer,40,40,1.2704999999999997
+HOPV15,Pretrain-then-Joint,40,40,1.658
+HOPV15,End-to-End Joint,40,40,1.1999999999999997
+HOPV15,Soft Parameter Sharing,40,40,2.44075
+HOPV15,Domain Adaptation (MMD),40,40,1.47
+Matbench-Gap,MFGP,40,40,0.12424999999999994
+Matbench-Gap,Sparse MFGP,40,40,0.12224999999999993
+Matbench-Gap,DKL,40,40,0.20699999999999993
+Matbench-Gap,Frozen-representation transfer,40,40,0.12049999999999994
+Matbench-Gap,Pretrain-then-Joint,40,40,0.05850000000000001
+Matbench-Gap,End-to-End Joint,40,40,0.11499999999999996
+Matbench-Gap,Soft Parameter Sharing,40,40,0.05100000000000001
+Matbench-Gap,Domain Adaptation (MMD),40,40,0.09474999999999999
+ExptGap-PBE,MFGP,40,40,0.10837499999999997
+ExptGap-PBE,Sparse MFGP,40,40,0.10088219696969689
+ExptGap-PBE,DKL,40,40,0.2233708333333333
+ExptGap-PBE,Frozen-representation transfer,40,40,0.08466666666666665
+ExptGap-PBE,Pretrain-then-Joint,40,40,0.08791666666666668
+ExptGap-PBE,End-to-End Joint,40,40,0.0930416666666667
+ExptGap-PBE,Soft Parameter Sharing,40,40,0.06910750000000006
+ExptGap-PBE,Domain Adaptation (MMD),40,40,0.09257000000000007
+Elastic-CHGNet,MFGP,40,40,279.17499999999995
+Elastic-CHGNet,Sparse MFGP,40,40,308.67499999999995
+Elastic-CHGNet,DKL,40,40,284.975
+Elastic-CHGNet,Frozen-representation transfer,40,40,278.45
+Elastic-CHGNet,Pretrain-then-Joint,40,40,311.15
+Elastic-CHGNet,End-to-End Joint,40,40,294.19999999999993
+Elastic-CHGNet,Soft Parameter Sharing,40,40,284.4
+Elastic-CHGNet,Domain Adaptation (MMD),40,40,296.22499999999997
+Elastic-SevenNet,MFGP,40,40,154.52500000000003
+Elastic-SevenNet,Sparse MFGP,40,40,135.52500000000018
+Elastic-SevenNet,DKL,40,40,139.0500000000001
+Elastic-SevenNet,Frozen-representation transfer,40,40,128.77500000000015
+Elastic-SevenNet,Pretrain-then-Joint,40,40,129.62500000000014
+Elastic-SevenNet,End-to-End Joint,40,40,121.22500000000021
+Elastic-SevenNet,Soft Parameter Sharing,40,40,126.07500000000016
+Elastic-SevenNet,Domain Adaptation (MMD),40,40,115.0250000000002
+Elastic-MatterSim,MFGP,40,40,250.075
+Elastic-MatterSim,Sparse MFGP,40,40,256.125
+Elastic-MatterSim,DKL,40,40,247.15
+Elastic-MatterSim,Frozen-representation transfer,40,40,244.225
+Elastic-MatterSim,Pretrain-then-Joint,40,40,248.85
+Elastic-MatterSim,End-to-End Joint,40,40,245.95
+Elastic-MatterSim,Soft Parameter Sharing,40,40,250.22499999999997
+Elastic-MatterSim,Domain Adaptation (MMD),40,40,245.225

@@ -1,0 +1,6 @@
+,Branin-Fav,Branin-Unfav,Park-Fav,Park-Unfav,COFs,FreeSolv,Polarizability,HOPV15,Matbench-Gap
+EI,0.2,0.2,0.6,0.8,0.2,0.0,0.0,0.8,0.2
+PI,1.0,0.8,0.6,0.6,0.0,0.2,0.0,0.8,0.4
+GP-UCB,0.0,0.0,0.8,0.6,0.2,0.4,0.0,0.6,0.4
+MES,0.2,0.0,0.8,0.8,0.2,0.4,0.0,0.6,0.2
+Thompson,0.4,1.0,0.6,0.8,0.2,0.0,0.0,0.2,0.0

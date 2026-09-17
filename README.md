@@ -1,113 +1,118 @@
-# Transfer-learning surrogates for multi-fidelity Bayesian optimization
+# MFBO-TL
 
-Publication repository for the manuscript
+Code and data for **Transfer-Learning Surrogates for Scalable Multi-Fidelity
+Bayesian Optimization in Molecular and Materials Discovery**, by Jaewook Lee,
+Ethan Errington, Christian D. Lorenz and Miao Guo.
 
-> **Transfer Learning Architectures for Scalable Multi-Fidelity Bayesian
-> Optimization**
+Version: **1.0.0**.
 
-This is a preprint. The manuscript is typeset with the standard LaTeX `article`
-class, deliberately without any journal template.
+## Installation
 
-It contains the manuscript, the canonical result files behind every figure and
-quoted statistic, the scripts that regenerate all of them, and the frozen
-benchmark code that produced the results. It was distilled from the full
-experiment repository (`MFBO-TL-Paper`) — see `PROVENANCE.md` for exactly what
-was copied, renamed, and left behind.
+The reference environment uses Python 3.9 on Linux. Installation and the example
+were checked on Ubuntu 22.04. A CPU is sufficient; no special hardware is required.
+Allow approximately 5–10 minutes for installation, depending on download speed.
 
-## Layout
+```bash
+git clone https://github.com/MGuo-Lab/MFBO-TL.git
+cd MFBO-TL
+python3.9 -m venv .venv
+source .venv/bin/activate
+python -m pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements.txt
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCH_THREADS=1
+```
 
-| Path | Contents |
+`requirements.txt` fixes NumPy, pandas, SciPy, scikit-learn, Matplotlib, PyTorch,
+BoTorch, GPyTorch and RDKit versions. Commands below run from the repository root.
+
+## Example
+
+Recreate the attainment figure from the supplied per-seed results:
+
+```bash
+python figures/make_attainment.py
+```
+
+Expected output is `figures/out/fig1_attainment.pdf` and its numerical CSV files.
+Reference values are in `results/expected/fig1_attainment_values.csv`.
+This example takes approximately 10 seconds on a CPU.
+
+To run one of the optimization trajectories used in the paper:
+
+```bash
+python runners/run_tl.py --benches Branin-Fav --models DNGOJoint --seeds 42
+```
+
+This uses the supplied 2,500-point Branin pool and a budget of 50 HF-equivalent
+units. It writes the trajectory, query indices and summary under
+`outputs/blr_replace__hf_argmin/cells/`. The recorded best-so-far trajectory is
+provided in `examples/branin_fav_seed42.csv`. Allow approximately 2–5 minutes on
+a CPU for this single-seed run.
+
+## Reproduce figures and tables
+
+```bash
+python reproduce.py
+```
+
+Outputs are written to `figures/out/`. Numerical references are in
+`results/expected/`; figure inputs and table mappings are described in
+[results/README.md](results/README.md).
+
+| Paper item | Script in `figures/` |
 |---|---|
-| `paper/` | `main.tex`, `references.bib`, `main.bbl` and the 12 canonical figures in `paper/paper_figures/` (the arXiv submission package plus the backmatter statements merged upstream in PR #1, `e1628a8`) |
-| `src/` | Frozen pipeline: `benchmark.py` (BO loop, 12 TL/DNN surrogates, benchmark loaders), `baselines.py` (NARGP, deep-kernel GP, sparse variational MFGP), `synthetic_functions.py` (Branin/Park LF–HF pairs) |
-| `benchmarks/` | Dataset build scripts (`python -m benchmarks.hopv15`, `python -m benchmarks.matbench_gap`) — regenerate `data/*.csv` from public sources; `_common.py` does featurize → standardize → PCA(10) |
-| `data/` | The nine candidate-pool CSVs used by every run (already built; 1.3 MB) |
-| `results/` | Canonical result CSVs consumed by the figure/statistics scripts (see the figure map below) |
-| `figures/` | Regeneration scripts. Outputs land in `figures/out/` (gitignored) for comparison against the shipped `paper/paper_figures/` |
-| `runners/` | The scripts that produced `results/` (provenance; re-running is optional and compute-heavy) |
-| `docs/` | `ROOT_CAUSE_INVESTIGATION.md` — the const-std LF-EI decision record referenced from `src/benchmark.py` |
+| Fig. 1b–p: attainment and deficit | `make_attainment.py` |
+| Fig. 2: regret trajectories | `make_trajectories.py` |
+| Fig. 3: controlled fidelity-quality grid | `make_grid.py` |
+| Fig. 4a,b: LF screening | `make_screening.py` |
+| Fig. 4c: compute scaling | `make_scaling.py` |
+| Supplementary Figs. 1, 2: acquisition policies | `make_acquisitions.py` |
+| Supplementary Fig. 3: LF calibration | `make_calibration.py` |
+| Supplementary Fig. 4: computational cost | `make_compute.py` |
+| Supplementary numerical tables | `make_tables.py` |
 
-## Rebuild the paper
-
-```bash
-cd paper && latexmk -pdf main.tex
-```
-
-## Regenerate every figure
-
-Needs only `numpy pandas scipy matplotlib` (no torch). Run from anywhere:
+The Fig. 1a schematic has a separate TikZ source. With TeX Live, TikZ,
+`standalone` and Helvetica installed:
 
 ```bash
-cd figures
-python make_final_regret.py          # Fig 1 b–k
-python make_fig1c_and_anytime_row.py # Fig 1 l–n + Supp family-split grid
-python make_regret_trajectory.py     # Fig 2
-python make_a6_acquisition_matrix.py # Fig 3
-python make_acquisition_portfolio.py # Fig 4 a–d
-python make_a1_calibration.py        # Fig 4 e–m
-python make_b2_topk.py               # Fig 5 a,b
-python make_scaling_law.py           # Fig 5 c
-python plot_computing_flops.py       # Supp computing_time (+ FLOPs table CSV)
-python make_si_star_sensitivity.py   # Supp star-sensitivity figure + SI table
+mkdir -p figures/out
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory=figures/out figures/overview.tex
 ```
 
-Outputs appear in `figures/out/`; compare against the canonical
-`paper/paper_figures/`. `fig1_overview.png` is the one hand-made asset (no
-generating script; the orphaned TikZ source is kept as
-`figures/fig1_overview.tex` for provenance — do not regenerate from it).
-
-## Reproduce the quoted statistics
+## Run the experiments
 
 ```bash
-cd figures
-python grid_stats.py                     # 126-cell grid self-test + headline fractions
-python plot_computing_flops.py           # writes out/computing_flops_values.csv (needed next)
-python stats_friedman_nemenyi_9bench.py  # Friedman/Nemenyi rank statistics (SI)
-python effect_sizes_manuscript0713.py    # rank-biserial effect-size tables (SI)
+python runners/run_tl.py
+python runners/run_gp.py
+python runners/run_grid.py
 ```
 
-### Environment sensitivity note
+The first two commands run the five TL and three GP surrogates on all thirteen
+pools, with seeds 42–81. The grid command runs all eight surrogates on 126
+conditions, with seeds 42–51. Use `--benches`, `--models`, `--seeds` and `--outdir`
+to select a main experiment; the grid runner uses `--cells` instead of `--benches`.
 
-Every figure and all corrected statistics (BH-corrected bin stars, map-level
-Wilcoxon) reproduce across scipy versions. The *uncorrected* per-cell Wilcoxon
-counts and a few borderline SI p-values follow scipy's exact-vs-approximation
-switching on 10–20 paired seeds, so matching the manuscript digit-for-digit
-requires the pinned `scipy==1.13.1` (`requirements.txt`): e.g. the anytime-AUC
-map's 122/126 raw significant cells appear as 112/126 under scipy 1.15. The
-`figures/grid_stats.py` self-test (`python grid_stats.py`) passes in full under
-the pinned environment and flags exactly this drift otherwise.
+| Paper label | Command-line model name |
+|---|---|
+| GP-base | `MFGP` |
+| GP-SV | `SparseMFGP` |
+| GP-DKL | `DKL` |
+| TL-base | `DNGOJoint` |
+| TL-PtJ | `TwoStageJoint` |
+| TL-E2E | `DNGOGradient` |
+| TL-SPS | `SoftParameterSharing` |
+| TL-MMD | `DomainAdaptationMMD` |
 
-## Re-run the experiments (optional, compute-heavy)
+[docs/experiments.md](docs/experiments.md) gives the supplementary experiment
+commands, budgets and initial designs.
 
-`requirements.txt` pins the reference environment (Python 3.9, torch 2.4.1,
-botorch 0.10.0, gpytorch 1.11, rdkit). Main entry points:
+## Data and citation
 
-- `python src/benchmark.py --n-seeds 20 --n-workers 48` — 12-surrogate suite
-- `python runners/run_fix6.py` — 15-surrogate trajectory cells (`results/traj_cells/`)
-- `python runners/run_flop_profile.py` — FLOP profile (`results/flop_profile/`)
-- `python runners/ranking_analysis.py` — LF/HF ranking metrics
-- `runners/grid/`: `featurize_polariz.py` → `grid_design.py` → `gen_grid_cells.py`
-  → `run_grid_cell.py` per cell — the 126-cell controlled fidelity-quality grid
-  (`results/grid/`)
-- `runners/analyze_surrogates.py` — acquisition-portfolio aggregation (needs the
-  raw per-acquisition runs, which are **not** shipped; see `PROVENANCE.md`)
+`data/` contains the thirteen candidate pools and 126 controlled LF sources.
+Dataset definitions, reconstruction commands and source references are in
+[data/README.md](data/README.md). Per-seed results are under `results/`.
 
-## Figure → script → data map
-
-| Figure (paper/paper_figures/) | Script (figures/) | Reads (results/…) |
-|---|---|---|
-| `final_regret.pdf` | `make_final_regret.py` | `main_9bench`, `extra_baselines`, `gpfamily_newbench` |
-| `fig1_anytime_row.pdf`, `fig1c_family_split_grid.pdf` | `make_fig1c_and_anytime_row.py` | `grid/` (+ `grid_stats.py`) |
-| `regret_trajectory.pdf` | `make_regret_trajectory.py` | `traj_cells/`, `data/*.csv` |
-| `A6_acquisition_matrix.pdf` | `make_a6_acquisition_matrix.py` | `main_corrected`, `main_9bench`, `mfgp_greedy_7bench`, `mfgp_greedy_newbench` |
-| `acquisition_portfolio.pdf` | `make_acquisition_portfolio.py` | `acq_portfolio/surrogates_{winrate,means}.csv` |
-| `A1_calibration_vs_regret.pdf` | `make_a1_calibration.py` | `calibration_sweep`, `calibration_{newbench,synthetic,park_early,gpfamily}` |
-| `B2_topk_overlap_and_screening.pdf` | `make_b2_topk.py` | `ranking_analysis/ranking_metrics.csv`, `data/*.csv`, `src/synthetic_functions.py` |
-| `compute_scaling_law.pdf` | `make_scaling_law.py` | `flop_profile/flop_profile.csv` |
-| `computing_time.pdf` | `plot_computing_flops.py` | `flop_profile/flop_profile.csv` |
-| `si_star_sensitivity.pdf` | `make_si_star_sensitivity.py` | `grid/` (+ `grid_stats.py`) |
-| `fig1_overview.png` | — (hand-made) | — |
-
-Code ↔ paper naming: `TwoStageJoint` = Pretrain-then-Joint Training,
-`DNGOJoint` = Stop-Gradient Joint Training, `DNGOGradient` = End-to-End Joint
-Training (`RENAME_MAP` in `figures/_common.py`).
+Code is released under the [MIT License](LICENSE). Third-party materials retain
+their source terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Use [CITATION.cff](CITATION.cff) to cite this software. Questions about the code
+can be posted to the repository's [issue tracker](https://github.com/MGuo-Lab/MFBO-TL/issues).

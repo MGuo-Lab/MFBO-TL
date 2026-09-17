@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite this software when using the code or results."
+type: software
+title: "MFBO-TL: Transfer-Learning Surrogates for Scalable Multi-Fidelity Bayesian Optimization in Molecular and Materials Discovery"
+authors:
+  - family-names: Lee
+    given-names: Jaewook
+  - family-names: Errington
+    given-names: Ethan
+  - family-names: Lorenz
+    given-names: Christian D.
+  - family-names: Guo
+    given-names: Miao
+version: 1.0.0
+date-released: 2026-09-17
+repository-code: "https://github.com/MGuo-Lab/MFBO-TL"
+url: "https://github.com/MGuo-Lab/MFBO-TL"
+license: MIT
