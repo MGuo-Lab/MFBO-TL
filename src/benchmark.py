@@ -28,7 +28,6 @@ from botorch.models.gp_regression_fidelity import SingleTaskMultiFidelityGP
 from botorch.models.transforms.outcome import Standardize
 from gpytorch.mlls import ExactMarginalLogLikelihood
 from botorch.fit import fit_gpytorch_mll
-from synthetic_functions import branin_hf, branin_lf, park_hf, park_lf, SCENARIOS, FUNCTIONS
 
 class LFNetwork(nn.Module):
 

@@ -6,11 +6,23 @@ Ethan Errington, Christian D. Lorenz and Miao Guo.
 
 Version: **1.0.0**.
 
+## System requirements
+
+- Operating system: Linux. Tested on Ubuntu 22.04.5 LTS (x86_64).
+- Python 3.9. Tested with Python 3.9.13 and 3.9.23.
+- Python packages, with the tested versions pinned in `requirements.txt`:
+  NumPy 1.26.4, pandas 2.2.3, SciPy 1.13.1, scikit-learn 1.5.2, Matplotlib 3.9.4,
+  PyTorch 2.4.1 (CPU build), BoTorch 0.10.0, GPyTorch 1.11 and RDKit 2024.3.5.
+- Hardware: a standard desktop CPU is sufficient. No GPU or other non-standard
+  hardware is required.
+
+Rebuilding the candidate pools from their public sources is optional and uses
+the separate pins in `requirements-data.txt` (see [data/README.md](data/README.md)).
+
 ## Installation
 
-The reference environment uses Python 3.9 on Linux. Installation and the example
-were checked on Ubuntu 22.04. A CPU is sufficient; no special hardware is required.
-Allow approximately 5–10 minutes for installation, depending on download speed.
+Allow approximately 5–10 minutes for installation on a normal desktop computer,
+depending on download speed.
 
 ```bash
 git clone https://github.com/MGuo-Lab/MFBO-TL.git
@@ -22,10 +34,9 @@ python -m pip install -r requirements.txt
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCH_THREADS=1
 ```
 
-`requirements.txt` fixes NumPy, pandas, SciPy, scikit-learn, Matplotlib, PyTorch,
-BoTorch, GPyTorch and RDKit versions. Commands below run from the repository root.
+Commands below run from the repository root.
 
-## Example
+## Demo
 
 Recreate the attainment figure from the supplied per-seed results:
 
@@ -45,9 +56,58 @@ python runners/run_tl.py --benches Branin-Fav --models DNGOJoint --seeds 42
 
 This uses the supplied 2,500-point Branin pool and a budget of 50 HF-equivalent
 units. It writes the trajectory, query indices and summary under
-`outputs/blr_replace__hf_argmin/cells/`. The recorded best-so-far trajectory is
-provided in `examples/branin_fav_seed42.csv`. Allow approximately 2–5 minutes on
-a CPU for this single-seed run.
+`outputs/blr_replace__hf_argmin/cells/`. The run should end with the line
+
+```
+Branin-Fav DNGOJoint s42: final=0.0682 auc=2.3494 ...
+```
+
+and the regret values in `traj_Branin-Fav_DNGOJoint_s42.csv` should match the
+recorded best-so-far trajectory in `examples/branin_fav_seed42.csv`. Allow
+approximately 2–5 minutes on a CPU for this single-seed run.
+
+## Run on your own data
+
+The optimizer selects candidates from a fixed pool in which both fidelities are
+known for every candidate. To use your own pool:
+
+1. Save it as a CSV in `data/`, for example `data/my_pool.csv`. Each row is one
+   candidate. Columns `HF` and `LF` hold the high- and low-fidelity values of
+   the objective to be **minimized**; every other column must be numeric and is
+   used as an input feature. For molecules, a single column whose name contains
+   `smiles` can be given instead of features, with `"use_smiles": True` below.
+
+   ```
+   f0,f1,HF,LF
+   0.12,0.80,3.41,3.02
+   ...
+   ```
+
+2. Register the pool in `PAPER` in `src/pools.py`:
+
+   ```python
+   'MyPool': {'csv': 'my_pool.csv', 'cost_ratio': 0.1, 'use_smiles': False,
+              'negate': False, 'budget': 30, 'init_budget': 30},
+   ```
+
+   `cost_ratio` is the cost of one LF evaluation relative to one HF evaluation,
+   `budget` is the total cost in HF-equivalent units, and `init_budget` sets the
+   size of the initial design ([docs/experiments.md](docs/experiments.md)).
+   Set `negate` to `True` to maximize the objective instead.
+
+3. Run a surrogate on it:
+
+   ```bash
+   python runners/run_tl.py --benches MyPool --models DNGOJoint --seeds 42 43 44
+   python runners/run_gp.py --benches MyPool --models MFGP --seeds 42 43 44
+   ```
+
+Results are written to `outputs/<arm>/cells/`. The `picks_*.csv` files list
+the selected rows by their index in the CSV and the fidelity at which each was
+evaluated; `traj_*.csv` gives the regret against the best HF value in the pool
+as a function of the spent budget; and `summary_*.csv` gives one row per seed.
+The surrogate labels used in the paper are listed under
+[Run the experiments](#run-the-experiments).
 
 ## Reproduce figures and tables
 
